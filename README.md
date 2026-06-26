@@ -178,120 +178,163 @@ Agent 与外部资源交互的统一网关。
 ## 安装
 
 ### 环境要求
-- WSL2 Ubuntu 22.04（或任意 Linux）+ Miniconda
+- WSL2 Ubuntu 22.04（或任意 Linux/macOS）+ Miniconda
 - Python ≥ 3.10
 - 可选：NVIDIA GPU（SATURN/ESM 用，CPU 亦可）
 
-### 步骤
+### 快速安装（对话式 CLI）
 
 ```bash
-# 1. 创建主环境
-conda create -n scagent -c conda-forge -c bioconda python=3.10 \
-    scanpy anndata scikit-learn scikit-misc biopython requests jinja2 \
-    python-dotenv matplotlib seaborn -y
+# 1. 克隆/进入项目
+cd ~/bioinfo/agent_framework
+
+# 2. 创建环境并安装（核心 CLI 依赖轻量）
+conda create -n scagent -c conda-forge python=3.10 rich prompt_toolkit requests \
+    jinja2 python-dotenv toml -y
 conda activate scagent
+pip install -e .            # 安装 omicagent 包, 注册 `omicagent` 命令
 
-# 2. 安装 LLM/深度学习依赖（GPU 版需对应 CUDA）
-pip install torch --index-url https://download.pytorch.org/whl/cu128  # 或 cpu
-pip install fair-esm typed-argument-parser record-keeper plotly scvi-tools
-
-# 3. （可选）R 环境（Seurat 生态）
-conda create -n seurat -c conda-forge -c bioconda r-seurat r-seuratobject \
-    r-harmony r-hdf5r r-dplyr -y
-
-# 4. （可选）SAMap 环境
-conda create -n samap -c conda-forge python=3.12 gxx gcc make -y
-conda activate samap && pip install sc-samap
+# 3. 启动
+omicagent
 ```
 
-### 部署框架代码
+### 完整安装（含分析/跨物种能力）
+
 ```bash
-# 框架代码位于 agent_framework/omicagent/
-# 设置 PYTHONPATH 即可使用
-export PYTHONPATH=/path/to/agent_framework:$PYTHONPATH
+conda create -n scagent -c conda-forge -c bioconda python=3.10 \
+    scanpy anndata scikit-learn scikit-misc biopython requests jinja2 \
+    python-dotenv toml rich prompt_toolkit matplotlib seaborn -y
+conda activate scagent
+pip install -e ".[analysis]"          # scanpy 生态
+pip install torch --index-url https://download.pytorch.org/whl/cu128  # GPU 版
+pip install -e ".[saturn]"            # SATURN/ESM 依赖
+
+# 可选: R 环境 (Seurat 生态)
+conda create -n seurat -c conda-forge -c bioconda r-seurat r-seuratobject r-harmony r-hdf5r -y
+# 可选: SAMap 环境
+conda create -n samap -c conda-forge python=3.12 gxx gcc make -y && conda activate samap && pip install sc-samap
 ```
 
 ---
 
 ## 配置
 
-在 `agent_framework/.env` 配置密钥与端点（优先读环境变量）：
+配置优先级：环境变量 > `~/.omicagent/config.toml`（用户配置）> 项目 `.env` > 默认值。
 
-```bash
-# DCS Cloud 统一 API (OpenAI 兼容)
-OMICAGENT_API_BASE=https://dcsapi.dcs.cloud/api/aigress/unified/v1
-OMICAGENT_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
+### 方式一：首次启动交互引导（推荐）
 
-# 模型路由
-OMICAGENT_SIMPLE_MODEL=deepseek-v4-pro
-OMICAGENT_COMPLEX_MODEL=glm-5.2
-OMICAGENT_COMPLEX_FALLBACK=claude-opus-4-8
+首次运行 `omicagent` 自动引导：选 API 提供商 → 填 base/key → 选模型 → 测试连接 → 保存到 `~/.omicagent/config.toml`。
 
-# NCBI E-utilities (可选, 有 key 提速)
-NCBI_API_KEY=
+### 方式二：手动写配置文件
 
-# OmicSeek (可选, 可达时使用)
-OMICSEEK_BASE=https://omicseek.cngb.org
+```toml
+# ~/.omicagent/config.toml
+[api]
+provider = "dcs"            # dcs / openai / custom
+base = "https://dcsapi.dcs.cloud/api/aigress/unified/v1"
+key = "sk-xxxxxxxxxxxxxxxxxxxxxxxx"
 
-# 调用参数
-OMICAGENT_TIMEOUT=180
-OMICAGENT_MAX_RETRIES=3
+[models]
+simple = "deepseek-v4-pro"      # 简单任务 (代码生成/元数据解析)
+complex = "glm-5.2"             # 复杂任务 (规划/注释映射)
+fallback = "claude-opus-4-8"    # 复杂任务回退
+
+[paths]
+data_dir = "/home/miaoxiyu/bioinfo/data"
+results_dir = "/home/miaoxiyu/bioinfo/results"
+
+[runtime]
+max_tool_rounds = 10
 ```
+
+### 方式三：项目 `.env`（开发用）
+
+复制 `.env.example` 为 `.env` 填入（见文件内注释）。`.env` 已被 gitignore，不会泄露。
 
 ---
 
-## 快速开始
+## 快速开始（对话式 CLI）
 
-### 1. 单能力使用
+### 1. 启动与对话
 
-```python
-from omicagent.data_searcher import DataSearcher
+```bash
+$ omicagent
+╭───────────────────────────────────────────────╮
+│ OmicAgent v0.2.0  植物单细胞组学 AI Scientist │
+│ 模型: glm-5.2 (复杂) / deepseek-v4-pro (简单) │
+│ 数据目录: /home/miaoxiyu/bioinfo/data         │
+╰───────────────────────────────────────────────╯
 
-# 能力1: 数据检索
-ds = DataSearcher()
-report = ds.search("拟南芥叶片单细胞数据，包含气孔细胞 (Arabidopsis leaf single cell, guard cell)")
-for r in report.records:
-    print(r.accession, r.species, r.download_url, r.relevance)
+> 帮我找拟南芥叶片单细胞数据，包含气孔细胞
+[工具调用] search_data(query="Arabidopsis leaf single cell guard cell")
+[工具结果] 找到 5 条 GEO 记录: GSE273926(拟南芥叶肉单细胞, rel=0.80) ...
+已为你检索到 5 个拟南芥叶片单细胞数据集, 最相关的是 GSE273926...
 
-# 能力3: 元数据语义解析
-from omicagent.metadata_parser import MetadataParser
-from omicagent.ontology import load_ontology
-mp = MetadataParser()
-adata = mp.load("/path/to/at.h5ad")
-ins = mp.inspect_columns(adata)                       # 识别 obs 列
-mr = mp.map_to_standard(adata, ins.celltype_col, load_ontology("plant_leaf"))
-adata = mp.apply_mapping(adata, ins.celltype_col, mr) # 写回标准列
-
-# 能力2: 自动建环境
-from omicagent.env_builder import EnvBuilder
-eb = EnvBuilder()
-spec = eb.analyze({"species": "Oryza sativa", "modality": "snRNA-seq", "format": "h5ad"},
-                  analysis_goal="QC + clustering")
-result = eb.build(spec)  # 复用已有 conda env, 验证包
+> 用本地数据整合水稻和拟南芥叶片
+[工具调用] list_local_data()
+[工具结果] 本地: rice_5k.h5ad, at_5k.h5ad
+[工具调用] run_cross_species(data1=rice_5k.h5ad, data2=at_5k.h5ad, method=samap)
+[工具结果] 对齐分数 0.89, UMAP PDF 已生成
+跨物种整合完成! 水稻+拟南芥叶片 10000 细胞, 对齐分数 0.89.
+结果: ~/bioinfo/data/samap_out_cli/ (UMAP PDF + 映射表)
 ```
 
-### 2. 端到端
+Agent 自动判断意图并按顺序调用工具（检索 → 解析 → 建环境 → 跨物种），无需手动指定流程。
+
+### 2. 斜杠命令
+
+| 命令 | 作用 |
+|---|---|
+| `/help` | 显示命令帮助 |
+| `/model [name]` | 切换复杂模型（无参数查看当前） |
+| `/config` | 交互编辑配置（API/模型） |
+| `/data [path]` | 设置/查看数据目录，列出本地 h5ad |
+| `/tools` | 列出可用工具 |
+| `/clear` | 清空对话历史 |
+| `/exit` | 退出 |
+
+### 3. 典型对话场景
+
+- **数据检索**："找水稻根尖单细胞数据" → 自动检索 NCBI GEO
+- **元数据解析**："解析 at_5k.h5ad 的细胞类型注释" → 识别 obs 列 + 映射标准体系
+- **单物种分析**："对 rice.h5ad 做质控和聚类" → 自动建环境 + 生成运行脚本
+- **跨物种整合**："整合水稻和拟南芥叶片" → 自动调 SAMap/SATURN + 出 UMAP PDF
+
+---
+
+## 高级用法（编程式 API）
+
+如需在脚本/Notebook 中调用，可绕过 CLI 直接用模块：
 
 ```python
 from omicagent.pipeline import OmicAgent
 
+# 端到端
 agent = OmicAgent()
 out = agent.search_and_analyze(
-    "拟南芥叶片单细胞数据，包含气孔细胞 (Arabidopsis leaf single cell, guard cell)",
-    local_data="/path/to/at_5k.h5ad",  # 提供本地数据则跳过下载
+    "拟南芥叶片单细胞数据，包含气孔细胞",
+    local_data="/path/to/at_5k.h5ad",
 )
-print(out["stages"]["search"]["n_records"])   # 检索记录数
-print(out["stages"]["metadata"]["mapping"])   # 映射表
-print(out["stages"]["env"]["success"])        # 环境搭建
-print(out["report"])                          # HTML 报告路径
-```
 
-### 3. 经典规划模式
+# 单能力
+from omicagent.data_searcher import DataSearcher
+report = DataSearcher().search("拟南芥叶片单细胞气孔")
 
-```python
-agent = OmicAgent()
-out = agent.run("对水稻叶片单细胞数据做质控、聚类和细胞类型注释")
-# 自动: 规划 -> 生成脚本 -> 执行 -> 报告
+from omicagent.metadata_parser import MetadataParser
+from omicagent.ontology import load_ontology
+mp = MetadataParser()
+adata = mp.load("/path/to/at.h5ad")
+ins = mp.inspect_columns(adata)
+mr = mp.map_to_standard(adata, ins.celltype_col, load_ontology("plant_leaf"))
+
+from omicagent.env_builder import EnvBuilder
+eb = EnvBuilder()
+spec = eb.analyze({"species": "Oryza sativa", "modality": "snRNA-seq", "format": "h5ad"})
+result = eb.build(spec)
+
+from omicagent.cross_species import run_cross_species
+r = run_cross_species("rice.h5ad", "at.h5ad", method="samap")
+print(r.summary())
 ```
 
 ---
