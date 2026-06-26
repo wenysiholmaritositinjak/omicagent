@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "omicagent"
+version = "0.2.0"
+description = "OmicAgent: 植物单细胞组学 AI Scientist Agent (对话式 CLI, 类 Claude Code)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "OmicAgent Team" }]
+keywords = ["single-cell", "cross-species", "bioinformatics", "agent", "cli", "plant"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+# 核心依赖: CLI 与 Agent 必需, 轻量
+dependencies = [
+    "rich>=13.0",
+    "prompt_toolkit>=3.0",
+    "requests>=2.28",
+    "jinja2>=3.0",
+    "python-dotenv>=1.0",
+    "toml>=0.10",
+]
+
+[project.optional-dependencies]
+# 数据分析核心 (scanpy 生态)
+analysis = [
+    "scanpy>=1.10",
+    "anndata>=0.10",
+    "scikit-learn>=1.3",
+    "scikit-misc>=0.3",
+    "biopython>=1.83",
+    "matplotlib>=3.7",
+    "seaborn>=0.13",
+    "pandas>=2.0",
+    "numpy>=1.24",
+    "scipy>=1.11",
+]
+# SATURN 跨物种整合 (ESM1b)
+saturn = [
+    "torch>=2.0",
+    "scvi-tools>=1.0",
+    "fair-esm>=2.0",
+    "typed-argument-parser>=1.7",
+    "record-keeper>=0.9",
+    "plotly>=5.0",
+    "torchvision",
+]
+# SAMap 跨物种整合
+samap = ["sc-samap>=3.0"]
+# 全量
+all = ["omicagent[analysis,saturn,samap]"]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+omicagent = "omicagent.cli:main"
+
+[tool.setuptools]
+packages = ["omicagent", "omicagent.templates"]
+
+[tool.setuptools.package-data]
+omicagent = ["templates/*.j2"]

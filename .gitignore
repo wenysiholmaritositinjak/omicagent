@@ -1,0 +1,56 @@
+# === 敏感配置 (绝不可提交) ===
+.env
+.env.*
+!.env.example
+
+# === Python 缓存与构建 ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+build/
+dist/
+.eggs/
+
+# === 运行产物 (不入库, 本地生成) ===
+logs/
+results/
+*.log
+
+# === 数据与模型大文件 (不入库) ===
+*.h5ad
+*.h5
+*.rds
+*.Rds
+*.mtx
+*.h5Seurat
+*.pt
+*.pth
+*.pkl
+*.npy
+*.npz
+# 但允许小的示例数据/测试 fixtures
+!tests/data/*
+!tests/fixtures/*
+
+# === 蛋白组/嵌入/blast 中间产物 ===
+*.fasta
+*.fa
+*.phr
+*.pin
+*.psq
+*.blast
+*.txt.blast
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === 编辑器/系统 ===
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*~

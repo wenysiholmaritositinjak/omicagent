@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>{{ title }}</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", "Microsoft YaHei", sans-serif; margin: 0; color: #222; background:#f7f8fa;}
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px; }
+  h1 { color: #1f3a5f; border-bottom: 3px solid #1f3a5f; padding-bottom: 10px; }
+  h2 { color: #1f3a5f; margin-top: 34px; border-left: 5px solid #4a90d9; padding-left: 12px; }
+  .meta { color:#666; font-size: 14px; margin-bottom: 8px; }
+  .summary { background:#fff; border:1px solid #e3e8ef; border-radius:8px; padding:18px 22px; line-height:1.8; white-space: pre-wrap; }
+  .grid { display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+  .card { background:#fff; border:1px solid #e3e8ef; border-radius:8px; padding:14px; }
+  .card img { max-width:100%; border-radius:6px; }
+  .card h3 { margin:0 0 10px 0; color:#1f3a5f; font-size:15px; }
+  table { border-collapse: collapse; width:100%; font-size:13px; background:#fff; }
+  th, td { border:1px solid #e3e8ef; padding:7px 10px; text-align:left; }
+  th { background:#eef3fa; color:#1f3a5f; }
+  tr:nth-child(even) td { background:#fafbfd; }
+  pre { background:#1e2733; color:#e6edf3; padding:14px; border-radius:6px; overflow:auto; font-size:12.5px; }
+  code { background:#eef3fa; padding:1px 5px; border-radius:3px; font-size:13px; }
+  .badge { display:inline-block; background:#4a90d9; color:#fff; border-radius:10px; padding:2px 10px; font-size:12px; margin-right:6px;}
+  .footer { color:#999; font-size:12px; margin-top:40px; text-align:center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>{{ title }}</h1>
+  <div class="meta">生成时间: {{ generated_at }} | OmicAgent v0.1 | 目标: {{ goal }}</div>
+
+  <h2>一、分析摘要</h2>
+  <div class="summary">{{ summary }}</div>
+
+  {% if plots %}
+  <h2>二、关键图表</h2>
+  <div class="grid">
+  {% for p in plots %}
+    <div class="card">
+      <h3>{{ p.title }}</h3>
+      {% if p.image_b64 %}
+      <img src="data:image/png;base64,{{ p.image_b64 }}" alt="{{ p.title }}">
+      {% else %}
+      <img src="{{ p.path }}" alt="{{ p.title }}">
+      {% endif %}
+      {% if p.caption %}<div class="meta" style="margin-top:6px">{{ p.caption }}</div>{% endif %}
+    </div>
+  {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if tables %}
+  <h2>三、数据表格</h2>
+  {% for t in tables %}
+  <h3 style="color:#1f3a5f">{{ t.title }}</h3>
+  <table>
+    <tr>{% for h in t.headers %}<th>{{ h }}</th>{% endfor %}</tr>
+    {% for row in t.rows %}
+    <tr>{% for c in row %}<td>{{ c }}</td>{% endfor %}</tr>
+    {% endfor %}
+  </table>
+  {% endfor %}
+  {% endif %}
+
+  {% if code_blocks %}
+  <h2>四、可复现代码</h2>
+  {% for cb in code_blocks %}
+  <h3 style="color:#1f3a5f">{{ cb.title }} <span class="badge">{{ cb.lang }}</span></h3>
+  <pre><code>{{ cb.code }}</code></pre>
+  {% endfor %}
+  {% endif %}
+
+  <h2>五、运行信息</h2>
+  <table>
+    <tr><th>项目</th><th>值</th></tr>
+    <tr><td>任务规划模型</td><td>{{ run_info.planner_model }}</td></tr>
+    <tr><td>代码生成模型</td><td>{{ run_info.codegen_model }}</td></tr>
+    <tr><td>LLM 调用次数</td><td>{{ run_info.llm_calls }}</td></tr>
+    <tr><td>Token 总量</td><td>{{ run_info.total_tokens }}</td></tr>
+    {% for k, v in run_info.extra.items() %}
+    <tr><td>{{ k }}</td><td>{{ v }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <div class="footer">OmicAgent · 植物单细胞组学 AI Scientist Agent · 基于 DCS Cloud 统一 API</div>
+</div>
+</body>
+</html>
