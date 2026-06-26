@@ -76,10 +76,14 @@ class CodeGenerator:
             f"推荐工具 ({lang}): {spec[lang]}\n"
             f"任务描述: {task_desc or spec['desc']}\n"
             f"数据/参数信息: {data_info or params}\n\n"
-            f"要求:\n"
+            f"要求 (Ponytail 懒惰阶梯 — 写最少必要代码):\n"
+            f"1. 先判断这步是否必要(YAGNI), 不必要跳过\n"
+            f"2. 优先复用 scanpy/seurat 现成函数, 不重写; 标准库/已装依赖能做就不引新包\n"
+            f"3. 能一行搞定就一行, 不铺张\n"
+            f"4. 只写能工作的最少代码; 但验证/错误处理/路径安全绝不省\n"
             f"- 完整可独立运行, 顶部注释说明输入输出路径\n"
             f"- 路径用参数/变量, 便于替换; 默认输入 ~/bioinfo/data, 输出 ~/bioinfo/results\n"
-            f"- 含异常处理与关键步骤日志 print\n"
+            f"- 含关键步骤日志 print 与异常处理\n"
             f"- 只输出代码, 不要解释文字, 不要 markdown 围栏"
         )
         resp = self.llm.complete(prompt, task_type="simple", max_tokens=6144, temperature=0.2)
