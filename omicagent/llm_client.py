@@ -126,6 +126,7 @@ class LLMClient:
         if r.status_code >= 400:
             log.error("API %s: %s", r.status_code, r.text[:500])
         r.raise_for_status()
+        r.encoding = "utf-8"  # 显式 UTF-8, 避免中文乱码
         data = r.json()
         choice = data["choices"][0]["message"]
         content = choice.get("content") or ""
@@ -186,6 +187,7 @@ class LLMClient:
         full_content = ""
         with requests.post(self.endpoint, headers=headers, json=payload, timeout=self.timeout, stream=True) as r:
             r.raise_for_status()
+            r.encoding = "utf-8"  # 显式 UTF-8, 避免流式中文 token 乱码
             for line in r.iter_lines(decode_unicode=True):
                 if not line or not line.startswith("data:"):
                     continue

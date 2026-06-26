@@ -7,6 +7,14 @@ from __future__ import annotations
 import sys, os, logging
 from typing import Optional
 
+# 强制 stdout/stderr UTF-8, 避免中文/emoji 乱码 (WSL locale 为 C 时 stdout 编码会退化为 ASCII)
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+
 from rich.console import Console
 from rich.panel import Panel
 from rich.markdown import Markdown
