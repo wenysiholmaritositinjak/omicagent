@@ -38,6 +38,20 @@ class ToolRegistry:
             self._search_data, max_result_chars=5000,
         ))
         self.register(ToolDef(
+            "list_databases",
+            "列出已知单细胞/空间组学数据库目录 (catalog). 返回各库的 数据类型/样本信息/关联文献/下载链接支持/API可用性. 检索时优先查有 API 的库(快). 可按物种/组织过滤.",
+            {"species": {"type": "string", "description": "物种过滤, 如 'Arabidopsis'(植物) / 'human'", "required": False},
+             "only_api": {"type": "boolean", "description": "只返回有 API 的库, 默认 false", "required": False}},
+            self._list_databases, max_result_chars=4000,
+        ))
+        self.register(ToolDef(
+            "update_database_catalog",
+            "网络刷新数据库目录的 API 可用性 (HEAD 检测), 或追加新库. 无参数=刷新全部可用性.",
+            {"add_name": {"type": "string", "description": "追加新库名(可选)", "required": False},
+             "add_url": {"type": "string", "description": "新库 URL(可选)", "required": False}},
+            self._update_catalog, max_result_chars=2000,
+        ))
+        self.register(ToolDef(
             "list_local_data",
             "列出本地可用的单细胞 h5ad 数据文件 (供跨物种分析等使用). 无参数.",
             {},
@@ -147,6 +161,28 @@ class ToolRegistry:
             if root.exists():
                 h5ads.extend(str(p) for p in root.glob("*.h5ad"))
         return {"local_h5ad": sorted(set(h5ads))[:20]}
+
+    def _list_databases(self, species="", only_api=False):
+        from .db_catalog import search_catalog, export_table
+        rows = search_catalog(species=species, only_api=only_api)
+        return {"n_databases": len(rows),
+                "databases": [{"name": r["name"], "scope": r.get("scope", ""),
+                               "api_available": r.get("api_available", False),
+                               "search_method": r.get("search_method", ""),
+                               "data_types": r.get("data_types", []),
+                               "has_sample_info": r.get("has_sample_info", False),
+                               "has_papers": r.get("has_papers", False),
+                               "has_download": r.get("has_download", False),
+                               "url": r.get("url", ""),
+                               "notes": r.get("notes", "")} for r in rows]}
+
+    def _update_catalog(self, add_name="", add_url=""):
+        from . import db_catalog as cat
+        if add_name and add_url:
+            r = cat.add_database(add_name, add_url, api=add_url, notes="用户追加")
+            return {"action": "add", **r}
+        r = cat.update_catalog()
+        return {"action": "refresh", **r}
 
     def _download_data(self, accession, dest=None, file_type="processed", max_size_gb=5):
         """下载数据, 优先 processed; 超过 max_size_gb 返回确认提示不下载."""

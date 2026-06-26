@@ -60,7 +60,7 @@ dev = ["pytest>=7.0"]
 omicagent = "omicagent.cli:main"
 
 [tool.setuptools]
-packages = ["omicagent", "omicagent.templates"]
+packages = ["omicagent", "omicagent.templates", "omicagent.data"]
 
 [tool.setuptools.package-data]
-omicagent = ["templates/*.j2"]
+omicagent = ["templates/*.j2", "data/*.json"]

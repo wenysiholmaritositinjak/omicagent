@@ -190,10 +190,32 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
             "[cyan]/lang [语言][/] 切换界面与回复语言 (中文/English/日本語/한국어/Français/Deutsch/Español/Português/Русский)\n"
             "[cyan]/config[/] 编辑配置 (API/模型/语言)\n"
             "[cyan]/data [path][/] 设置/查看数据目录\n"
+            "[cyan]/catalog [物种][/] 列出已知数据库目录 (植物/人类/脑等)\n"
+            "[cyan]/update-catalog[/] 网络刷新数据库目录可用性\n"
             "[cyan]/clear[/] 清空对话历史\n"
             "[cyan]/tools[/] 列出可用工具\n"
             "[cyan]/exit[/] 退出",
             title="命令", border_style="cyan"))
+    elif c == "/catalog":
+        from .db_catalog import export_table
+        rows = export_table()
+        # 物种过滤
+        if arg:
+            rows = [r for r in rows if arg.lower() in r.get("scope", "").lower() or arg.lower() in r.get("species", "").lower()]
+        console.print(Panel.fit(f"[bold]数据库目录[/] (共 {len(rows)} 个)", border_style="cyan"))
+        from rich.table import Table
+        t = Table(show_lines=False, expand=True)
+        for col in ["name", "scope", "api", "data_types", "sample", "papers", "download"]:
+            t.add_column(col, style="cyan" if col == "name" else None)
+        for r in rows:
+            t.add_row(r["name"], r["scope"], r["api_available"],
+                      r["data_types"][:35], r["sample_info"], r["papers"], r["download"])
+        console.print(t)
+    elif c == "/update-catalog":
+        console.print("[cyan]刷新数据库目录可用性...[/]")
+        from .db_catalog import update_catalog
+        r = update_catalog()
+        console.print(f"[green]✓ 已刷新 {r['checked']} 个库, {r['available']} 个可用 (版本 {r['version']})[/]")
     elif c == "/lang":
         if arg:
             # 直接指定语言名
