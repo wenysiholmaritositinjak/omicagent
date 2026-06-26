@@ -145,6 +145,7 @@ class ToolRegistry:
                 "download_url": r.download_url, "pubmed_id": r.pubmed_id,
                 "data_type": r.data_type, "total_size": _human_size(r.total_size_bytes),
                 "has_processed": r.has_processed,
+                "organs": r.metadata.get("organs", []),
                 "files": [{"name": f["name"], "size": f["size_human"], "type": f["type"]} for f in r.files[:8]],
                 "recommend": "processed" if r.has_processed else (r.data_type or "unknown"),
             })

@@ -57,6 +57,7 @@ class ParsedQuery:
     celltype_hint: str = ""     # 气孔细胞 etc
     source_hints: list[str] = field(default_factory=list)  # 文献提到的库: geo/arrayexpress/...
     geo_term: str = ""          # 构造好的 GEO 检索式
+    candidate_species: list = field(default_factory=list)  # 植物/泛指时枚举的物种列表
 
 
 @dataclass
@@ -96,6 +97,23 @@ class NCBIGeoSearcher(BaseSearcher):
         self.ncbi = ncbi or NCBIClient(api_key=getattr(config, "NCBI_API_KEY", None))
 
     def search(self, pq: ParsedQuery, topk: int = 5) -> list[DatasetRecord]:
+        # 植物/泛指时: 对每个候选物种分别检索 (带 [Organism] 精准命中), 合并去重
+        if pq.candidate_species and not pq.species:
+            all_recs = []
+            seen_acc = set()
+            per_species = max(2, topk // max(1, len(pq.candidate_species)))
+            for sp in pq.candidate_species[:6]:  # 最多 6 个物种避免过慢
+                sub_pq = ParsedQuery(keywords=pq.keywords, species=sp, modality=pq.modality,
+                                     tissue=pq.tissue, celltype_hint=pq.celltype_hint,
+                                     source_hints=pq.source_hints)
+                for r in self._search_one(sub_pq, per_species):
+                    if r.accession and r.accession not in seen_acc:
+                        seen_acc.add(r.accession)
+                        all_recs.append(r)
+            return all_recs[:topk]
+        return self._search_one(pq, topk)
+
+    def _search_one(self, pq: ParsedQuery, topk: int) -> list[DatasetRecord]:
         term = pq.geo_term or self._build_term(pq)
         log.info("[GEO] 检索: %s", term)
         recs = self.ncbi.search_geo(term, retmax=topk)
@@ -122,6 +140,9 @@ class NCBIGeoSearcher(BaseSearcher):
                         data_type = "unknown" if not files else "other"
                 except Exception as e:
                     log.debug("取 suppl 文件失败 %s: %s", acc, e)
+            # 图谱类数据: 从 title+summary 识别包含的所有器官 (单独检索某器官时也能命中)
+            text = (r.get("title", "") + " " + r.get("summary", "")).lower()
+            organs = _extract_organs(text)
             out.append(DatasetRecord(
                 title=r.get("title", ""),
                 accession=acc,
@@ -134,7 +155,7 @@ class NCBIGeoSearcher(BaseSearcher):
                 download_url=geo_suppl_url(acc),
                 pubmed_id=";".join(r.get("pubmed_ids", [])),
                 metadata={"uid": r.get("uid", ""), "type": r.get("type", ""),
-                          "gpl": r.get("platform", "")},
+                          "gpl": r.get("platform", ""), "organs": organs},
                 files=files, data_type=data_type,
                 total_size_bytes=total_sz, has_processed=has_proc,
             ))
@@ -381,10 +402,15 @@ class DataSearcher:
             "你是组学数据检索助手. 把用户自然语言需求解析为结构化检索查询, 输出 JSON:\n"
             '{"keywords":[...英文关键词, 用于NCBI检索, 如"guard cell"/"stomata"], '
             '"species":"(拉丁学名如 Arabidopsis thaliana, 留空若未指定)", '
-            '"modality":"(scRNA-seq/snRNA-seq/spatial RNA-seq 等)", "tissue":"(英文如 leaf/root)", '
+            '"candidate_species":["(仅当用户说植物/泛指物种时, 列出常见植物拉丁学名: '
+            'Arabidopsis thaliana, Oryza sativa, Zea mays, Solanum lycopersicum, '
+            'Glycine max, Triticum aestivum, Hordeum vulgare, Nicotiana tabacum, Populus trichocarpa 等; '
+            '指定了具体物种则为空数组)"], '
+            '"modality":"(scRNA-seq/snRNA-seq/spatial RNA-seq 等)", "tissue":"(英文如 leaf/root/embryo)", '
             '"celltype_hint":"(英文细胞类型如 guard cell, 无则空)", '
             '"source_hints":["geo"/"arrayexpress"/"omicseek"/"cellxgene" 等用户明确提到的库, 无则空数组]}\n'
-            "注意: keywords/tissue/celltype_hint 必须用英文(GEO不支持中文检索), 物种用拉丁学名.\n"
+            "注意: keywords/tissue/celltype_hint 必须用英文(GEO不支持中文检索), 物种用拉丁学名. "
+            "用户说'植物'但未指定物种时, candidate_species 必须给出多个候选物种供分别检索.\n"
             f"用户需求: {user_query}\n只输出 JSON."
         )
         data = self.llm.complete_json(prompt, task_type="complex", max_tokens=800)
@@ -395,6 +421,7 @@ class DataSearcher:
             tissue=data.get("tissue", "") or "",
             celltype_hint=data.get("celltype_hint", "") or "",
             source_hints=[s.lower() for s in (data.get("source_hints") or [])],
+            candidate_species=data.get("candidate_species", []) or [],
         )
         log.info("解析查询: species=%s modality=%s tissue=%s hints=%s",
                  pq.species, pq.modality, pq.tissue, pq.source_hints)
@@ -530,3 +557,37 @@ def _guess_modality(text: str) -> str:
     if "sc-rna" in t or "scrna" in t or "single-cell" in t or "single cell" in t:
         return "scRNA-seq"
     return ""
+
+
+# 植物器官/组织关键词 (用于图谱类数据补全器官标签)
+_PLANT_ORGANS = {
+    "root": ["root", "radicle", "lateral root", "root tip", "root cap"],
+    "leaf": ["leaf", "leaves", "blade", "foliage", "mesophyll", "petiole"],
+    "flower": ["flower", "floral", "inflorescence", "petal", "sepal", "stamen", "carpel",
+               "gynoecium", "androecium", "anther", "filament"],
+    "embryo": ["embryo", "embryonic", "zygote", "globular", "heart stage", "torpedo",
+               "cotyledon", "hypocotyl", "epicotyl", "suspensor", "proembryo"],
+    "seed": ["seed", "endosperm", "aleurone", "seed coat", "testa", "developing seed",
+             "mature seed", "germination"],
+    "stem": ["stem", "shoot", "internode", "node", "shoot apex"],
+    "meristem": ["meristem", "sam", "ram", "procambium", "protoderm", "ground meristem",
+                 "vascular cambium"],
+    "pollen": ["pollen", "microspore", "pollen tube", "male gametophyte"],
+    "ovule": ["ovule", "megaspor", "female gametophyte", "embryo sac"],
+    "vascular": ["vascular", "xylem", "phloem", "bundle sheath", "companion cell", "fiber"],
+    "epidermis": ["epidermis", "epidermal", "stomata", "guard cell", "trichome", "pavement cell"],
+    "fruit": ["fruit", "pericarp", "berry", "silique", "pod"],
+    "nodule": ["nodule", "rhizobium"],
+}
+
+
+def _extract_organs(text: str) -> list[str]:
+    """从 title+summary 识别包含的植物器官 (图谱类数据补全, 单独检索某器官时也能命中)."""
+    if not text:
+        return []
+    t = text.lower()
+    found = []
+    for organ, kws in _PLANT_ORGANS.items():
+        if any(kw in t for kw in kws):
+            found.append(organ)
+    return found
