@@ -32,10 +32,10 @@ class ToolRegistry:
     def _register_defaults(self):
         self.register(ToolDef(
             "search_data",
-            "检索单细胞/空间组学数据集 (NCBI GEO 等多源). 输入自然语言研究需求, 返回匹配数据集列表(含accession/物种/下载链接/相关性).",
+            "检索单细胞/空间组学数据集 (NCBI GEO). 返回每条的 accession/物种/样本数/相关性, 以及数据类型(processed=处理好的rds/h5ad推荐, matrix=10x矩阵, raw=测序fastq, archive=tar包)、文件大小、文件列表. 结果按 processed 优先排序.",
             {"query": {"type": "string", "description": "自然语言检索需求, 如 '拟南芥叶片单细胞气孔'", "required": True},
              "topk": {"type": "integer", "description": "返回条数, 默认5", "required": False}},
-            self._search_data,
+            self._search_data, max_result_chars=5000,
         ))
         self.register(ToolDef(
             "list_local_data",
@@ -45,10 +45,12 @@ class ToolRegistry:
         ))
         self.register(ToolDef(
             "download_data",
-            "下载指定数据集 (按 accession). 需先 search_data 获得 accession.",
+            "下载指定数据集 (按 accession). 优先下载处理好的 processed(rds/h5ad); 超过 max_size_gb(默认5G) 返回确认提示不下载. 返回文件类型/大小/路径.",
             {"accession": {"type": "string", "description": "GEO accession 如 GSE273926", "required": True},
-             "dest": {"type": "string", "description": "下载目录, 默认 ~/bioinfo/data/downloaded", "required": False}},
-            self._download_data,
+             "dest": {"type": "string", "description": "下载目录, 默认 <data_dir>/<accession>", "required": False},
+             "file_type": {"type": "string", "description": "processed(默认,处理好的rds/h5ad)/matrix(10x矩阵)/raw(测序)/all(全部)", "required": False},
+             "max_size_gb": {"type": "number", "description": "超过此大小(GB)需手动确认, 默认5", "required": False}},
+            self._download_data, max_result_chars=4000,
         ))
         self.register(ToolDef(
             "parse_metadata",
@@ -118,13 +120,25 @@ class ToolRegistry:
     # ---- 工具实现 ----
     def _search_data(self, query, topk=5):
         from .data_searcher import DataSearcher
+        from .ncbi_client import _human_size
         ds = DataSearcher(self.llm)
         rep = ds.search(query, topk=topk)
-        recs = [{"accession": r.accession, "source": r.source_db, "species": r.species,
-                 "n_samples": r.n_samples, "title": r.title[:80], "relevance": round(r.relevance, 2),
-                 "download_url": r.download_url, "pubmed_id": r.pubmed_id} for r in rep.records]
+        recs = []
+        for r in rep.records:
+            recs.append({
+                "accession": r.accession, "source": r.source_db, "species": r.species,
+                "n_samples": r.n_samples, "title": r.title[:80], "relevance": round(r.relevance, 2),
+                "download_url": r.download_url, "pubmed_id": r.pubmed_id,
+                "data_type": r.data_type, "total_size": _human_size(r.total_size_bytes),
+                "has_processed": r.has_processed,
+                "files": [{"name": f["name"], "size": f["size_human"], "type": f["type"]} for f in r.files[:8]],
+                "recommend": "processed" if r.has_processed else (r.data_type or "unknown"),
+            })
+        # processed 优先排序 (推荐处理好的数据)
+        recs.sort(key=lambda x: (not x["has_processed"], -x["relevance"]))
         return {"n_records": len(recs), "records": recs, "elapsed": round(rep.elapsed, 1),
-                "sources_ok": rep.sources_ok}
+                "sources_ok": rep.sources_ok,
+                "note": "data_type: processed=处理好的rds/h5ad(推荐), matrix=10x矩阵, raw=测序fastq, archive=tar包"}
 
     def _list_local_data(self):
         data_dir = Path(os.environ.get("OMICAGENT_DATA_DIR", str(Path.home() / "bioinfo" / "data")))
@@ -134,13 +148,48 @@ class ToolRegistry:
                 h5ads.extend(str(p) for p in root.glob("*.h5ad"))
         return {"local_h5ad": sorted(set(h5ads))[:20]}
 
-    def _download_data(self, accession, dest=None):
+    def _download_data(self, accession, dest=None, file_type="processed", max_size_gb=5):
+        """下载数据, 优先 processed; 超过 max_size_gb 返回确认提示不下载."""
+        from .ncbi_client import geo_suppl_files, _human_size
         from .data_searcher import DataSearcher
+        files = geo_suppl_files(accession)
+        if not files:
+            return {"accession": accession, "error": "未找到 suppl 文件 (可能无公开数据或需 SRA 下载)"}
+        # 按类型过滤
+        if file_type == "processed":
+            sel = [f for f in files if f["type"] == "processed"] or files
+        elif file_type == "all":
+            sel = files
+        else:
+            sel = [f for f in files if f["type"] == file_type] or files
+        total = sum(f["size_bytes"] for f in sel)
+        total_gb = total / 1024**3
+        file_summary = [{"name": f["name"], "size": f["size_human"], "type": f["type"]} for f in sel]
+        # 超过阈值, 返回确认提示 (不下载)
+        if total_gb > max_size_gb:
+            return {"accession": accession, "need_confirm": True,
+                    "estimated_size_gb": round(total_gb, 2), "total_size": _human_size(total),
+                    "file_type": file_type, "files": file_summary,
+                    "msg": f"总大小 {total_gb:.1f}G 超过 {max_size_gb}G, 需手动确认. "
+                           f"回复 '确认下载 {accession}' 或在 file_type=all 时指定."}
+        # 下载
         ds = DataSearcher(self.llm)
         rec = type("R", (), {"accession": accession, "source_db": "GEO",
                               "download_url": _geo_url(accession)})()
-        files = ds.download(rec, dest or "~/bioinfo/data/downloaded")
-        return {"accession": accession, "downloaded": files, "n_files": len(files)}
+        downloaded = []
+        import subprocess
+        d = Path(os.path.expanduser(dest or os.path.join(
+            os.environ.get("OMICAGENT_DATA_DIR", "~/bioinfo/data"), accession)))
+        d.mkdir(parents=True, exist_ok=True)
+        for f in sel:
+            out = d / f["name"]
+            subprocess.run(["curl", "-sL", "-o", str(out), f["url"]],
+                           check=False, timeout=1800)
+            if out.exists() and out.stat().st_size > 0:
+                downloaded.append(str(out))
+        return {"accession": accession, "downloaded": downloaded, "n_files": len(downloaded),
+                "file_type": file_type, "total_size": _human_size(total),
+                "files": file_summary}
 
     def _parse_metadata(self, path):
         from .metadata_parser import MetadataParser

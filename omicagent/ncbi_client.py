@@ -164,3 +164,76 @@ def geo_suppl_url(accession: str) -> str:
     num = m.group(1)
     prefix = num[:-3] + "nnn"  # GSE332675 -> GSE332nnn
     return f"https://ftp.ncbi.nlm.nih.gov/geo/series/{prefix}/{num}/suppl/"
+
+
+def _parse_size(s: str) -> int:
+    """解析 Apache 列表大小字符串 (118M/1.2G/580/-) 为字节."""
+    if not s or s == "-":
+        return 0
+    s = s.strip()
+    units = {"K": 1024, "M": 1024**2, "G": 1024**3, "T": 1024**4}
+    try:
+        if s[-1] in units:
+            return int(float(s[:-1]) * units[s[-1]])
+        return int(float(s))
+    except Exception:
+        return 0
+
+
+def _file_type(name: str) -> str:
+    """推断文件类型: processed(处理好 rds/h5ad) / matrix(10x矩阵) / raw(测序) / archive / other."""
+    n = name.lower()
+    if any(n.endswith(e) for e in (".rds", ".h5ad", ".h5", ".loom", ".rds.gz")):
+        return "processed"
+    if any(n.endswith(e) for e in (".mtx", ".mtx.gz", ".tsv", ".tsv.gz", ".csv", ".csv.gz")):
+        return "matrix"
+    if any(n.endswith(e) for e in (".fastq", ".fq", ".fastq.gz", ".fq.gz", ".bam")):
+        return "raw"
+    if ".tar" in n or n.endswith(".zip"):
+        return "archive"
+    return "other"
+
+
+def geo_suppl_files(accession: str, timeout: int = 12) -> list[dict]:
+    """列 GEO series supplementary 文件, 返回 [{name, size_bytes, size_human, type, url}].
+
+    解析 Apache 目录列表, 一次请求获取文件名+大小+类型.
+    """
+    import requests as _rq
+    url = geo_suppl_url(accession)
+    if not url:
+        return []
+    try:
+        r = _rq.get(url, timeout=timeout)
+        if r.status_code != 200:
+            return []
+        r.encoding = "utf-8"
+    except Exception:
+        return []
+    # Apache 列表行: <a href="name">name</a>   YYYY-MM-DD HH:MM  size
+    pattern = re.compile(r'<a href="([^"]+)">[^<]+</a>\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s+([\d.]+[KMGT]?|-)')
+    files = []
+    for m in pattern.finditer(r.text):
+        name = m.group(1)
+        if name.startswith("/") or name.startswith("?") or name == "Parent Directory":
+            continue
+        size_bytes = _parse_size(m.group(3))
+        files.append({
+            "name": name,
+            "size_bytes": size_bytes,
+            "size_human": _human_size(size_bytes),
+            "type": _file_type(name),
+            "url": url + name,
+        })
+    return files
+
+
+def _human_size(n: int) -> str:
+    """字节转人类可读 (118M, 1.2G)."""
+    if n <= 0:
+        return "-"
+    for u in ("B", "K", "M", "G", "T"):
+        if n < 1024:
+            return f"{n:.1f}{u}" if u != "B" else f"{n}B"
+        n /= 1024
+    return f"{n:.1f}P"

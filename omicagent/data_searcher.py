@@ -18,7 +18,7 @@ import requests
 
 from . import config
 from .llm_client import LLMClient
-from .ncbi_client import NCBIClient, geo_suppl_url
+from .ncbi_client import NCBIClient, geo_suppl_url, geo_suppl_files
 
 log = logging.getLogger("omicagent.search")
 
@@ -38,6 +38,10 @@ class DatasetRecord:
     pubmed_id: str = ""
     metadata: dict = field(default_factory=dict)
     relevance: float = 0.0  # 重排打分
+    files: list = field(default_factory=list)        # suppl 文件详情 [{name,size_bytes,size_human,type,url}]
+    data_type: str = ""                               # processed/matrix/raw/mixed/unknown
+    total_size_bytes: int = 0                         # 全部文件总大小
+    has_processed: bool = False                       # 是否有处理好的 rds/h5ad
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -98,6 +102,26 @@ class NCBIGeoSearcher(BaseSearcher):
         out = []
         for r in recs:
             acc = r.get("accession", "")
+            # 查 suppl 文件详情 (类型/大小)
+            files, data_type, total_sz, has_proc = [], "", 0, False
+            if acc:
+                try:
+                    files = geo_suppl_files(acc, timeout=10)
+                    types = {f["type"] for f in files}
+                    total_sz = sum(f["size_bytes"] for f in files)
+                    has_proc = "processed" in types
+                    if has_proc:
+                        data_type = "processed" if not (types - {"processed", "other"}) else "mixed"
+                    elif "matrix" in types:
+                        data_type = "matrix"
+                    elif "raw" in types:
+                        data_type = "raw"
+                    elif "archive" in types:
+                        data_type = "archive"
+                    else:
+                        data_type = "unknown" if not files else "other"
+                except Exception as e:
+                    log.debug("取 suppl 文件失败 %s: %s", acc, e)
             out.append(DatasetRecord(
                 title=r.get("title", ""),
                 accession=acc,
@@ -111,6 +135,8 @@ class NCBIGeoSearcher(BaseSearcher):
                 pubmed_id=";".join(r.get("pubmed_ids", [])),
                 metadata={"uid": r.get("uid", ""), "type": r.get("type", ""),
                           "gpl": r.get("platform", "")},
+                files=files, data_type=data_type,
+                total_size_bytes=total_sz, has_processed=has_proc,
             ))
         return out
 
