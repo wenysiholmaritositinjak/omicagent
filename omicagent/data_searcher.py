@@ -234,13 +234,145 @@ class OmicSeekSearcher(BaseSearcher):
         return bool(self.base)
 
 
+# ===================== 植物单细胞专用库 (无 API, 提供页面指引+元数据) =====================
+class PlantSpecialtySearcher(BaseSearcher):
+    """植物单细胞专用数据库: scPlantDB / PlantSC / Plant Cell Atlas. 多为 SPA 无公开 API,
+    返回数据库入口与检索建议, 引导用户手动浏览 (LLM 据物种/组织推荐最相关库)."""
+    name = "plant_specialty"
+    DBS = [
+        {"name": "scPlantDB", "url": "https://biobigdata.nju.edu.cn/scplantdb/",
+         "desc": "植物单细胞转录组数据库 (南大), 含拟南芥/水稻/玉米等物种多种组织"},
+        {"name": "PlantSC", "url": "http://plantsc.zju.edu.cn/",
+         "desc": "植物单细胞数据库 (浙大), 物种与组织覆盖较广"},
+        {"name": "Plant Cell Atlas", "url": "https://www.plantcellatlas.org/",
+         "desc": "植物细胞图谱联盟, 拟南芥单细胞图谱"},
+        {"name": "CottonSCDB", "url": "http://cotton.zju.edu.cn/",
+         "desc": "棉花单细胞数据库"},
+    ]
+
+    def search(self, pq: ParsedQuery, topk: int = 5) -> list[DatasetRecord]:
+        out = []
+        for db in self.DBS:
+            out.append(DatasetRecord(
+                title=f"[{db['name']}] {db['desc']}",
+                accession=db["name"], source_db=db["name"],
+                species=pq.species or "多种植物", modality="scRNA-seq",
+                summary=db["desc"],
+                download_url=db["url"],
+                data_type="specialty_db", metadata={"manual_browse": True},
+            ))
+        return out[:topk]
+
+    def available(self) -> bool:
+        return True
+
+
+# ===================== 文献 data availability 检索 =====================
+class PaperDataAvailabilitySearcher(BaseSearcher):
+    """检索 PubMed 文献, 抓全文提取 data availability 声明中的特殊数据链接
+    (GEO/SRA/ArrayExpress/Zenodo/figshare/Dryad/STOmics 等). 补全 GEO suppl 之外的来源."""
+    name = "paper_data"
+
+    def __init__(self, ncbi: Optional[NCBIClient] = None, llm: Optional[LLMClient] = None):
+        self.ncbi = ncbi or NCBIClient(api_key=getattr(config, "NCBI_API_KEY", None))
+        self.llm = llm
+
+    def search(self, pq: ParsedQuery, topk: int = 5) -> list[DatasetRecord]:
+        from .ncbi_client import extract_data_links
+        import requests as _rq
+        term = self._build_term(pq)
+        log.info("[paper_data] PubMed 检索: %s", term)
+        try:
+            pmids = self.ncbi.esearch("pubmed", term, retmax=topk)
+        except Exception as e:
+            log.warning("[paper_data] pubmed 检索失败: %s", e)
+            return []
+        out = []
+        for pmid in pmids:
+            try:
+                # PubMed 摘要 (必有)
+                abstract = self.ncbi.fetch_pubmed_fulltext(pmid)
+                title = abstract[:120].split(".")[0] if abstract else f"PMID {pmid}"
+                # 尝试 PMC 全文提取数据链接 (加分项)
+                pmc_full = self._fetch_pmc_fulltext(pmid)
+                links = extract_data_links(pmc_full) if pmc_full else extract_data_links(abstract)
+                dl = "; ".join(f"{l['db']}:{l['value']}" for l in links[:6])
+                summary = abstract[:300] if abstract else ""
+                if links:
+                    summary = f"[含数据链接 {dl[:180]}] " + summary
+                else:
+                    summary = "[需查全文确认数据位置] " + summary
+                out.append(DatasetRecord(
+                    title=title, accession=f"PMID:{pmid}", source_db="PubMed",
+                    species=pq.species, modality=pq.modality,
+                    summary=summary, download_url=dl, pubmed_id=pmid,
+                    data_type="paper", metadata={"data_links": links, "has_pmc": bool(pmc_full)},
+                ))
+            except Exception as e:
+                log.debug("[paper_data] PMID %s 解析失败: %s", pmid, e)
+        return out
+
+    def _fetch_pmc_fulltext(self, pmid: str) -> str:
+        """pubmed id -> PMC 全文 (若有), 否则空. 走 NCBIClient 限速."""
+        import re as _re
+        import time as _time
+        try:
+            self.ncbi._throttle()  # elink 限速
+            r = _rq.get("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi",
+                        params={"dbfrom": "pubmed", "db": "pmc", "id": pmid, "retmode": "json"},
+                        timeout=15)
+            if r.status_code == 429:
+                _time.sleep(2); return ""
+            pmc_ids = []
+            for ls in r.json().get("linksets", []):
+                for ldb in ls.get("linksetdbs", []) or []:
+                    pmc_ids.extend(ldb.get("links", []))
+            if not pmc_ids:
+                return ""
+            self.ncbi._throttle()  # efetch 限速
+            r2 = _rq.get("https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi",
+                          params={"db": "pmc", "id": pmc_ids[0], "rettype": "xml", "retmode": "xml"},
+                          timeout=30)
+            if r2.status_code == 429:
+                _time.sleep(2); return ""
+            r2.encoding = "utf-8"
+            txt = _re.sub(r"<[^>]+>", " ", r2.text)
+            return _re.sub(r"\s+", " ", txt).strip()
+        except Exception:
+            return ""
+
+    def _build_term(self, pq: ParsedQuery) -> str:
+        parts = []
+        if pq.species:
+            parts.append(f'"{pq.species}"[Organism]')
+        parts.append("(single cell[Title/Abstract] OR single-cell[Title/Abstract] OR scRNA-seq[Title/Abstract] OR snRNA-seq[Title/Abstract] OR spatial transcriptomic*[Title/Abstract])")
+        for kw in pq.keywords:
+            ka = "".join(c for c in kw if ord(c) < 128).strip()
+            if 2 < len(ka) < 40:
+                parts.append(f'{ka}[Title/Abstract]')
+        if pq.tissue:
+            t = "".join(c for c in pq.tissue if ord(c) < 128).strip()
+            if t:
+                parts.append(f'{t}[Title/Abstract]')
+        return " AND ".join(parts) if parts else "single cell[Title/Abstract]"
+
+    def available(self) -> bool:
+        return True
+
+
 # ===================== 主类: DataSearcher =====================
 class DataSearcher:
     def __init__(self, llm: Optional[LLMClient] = None, searchers: Optional[list[BaseSearcher]] = None):
         self.llm = llm or LLMClient()
         self.ncbi = NCBIClient(api_key=getattr(config, "NCBI_API_KEY", None))
         if searchers is None:
-            searchers = [NCBIGeoSearcher(self.ncbi), ArrayExpressSearcher(), OmicSeekSearcher()]
+            searchers = [
+                NCBIGeoSearcher(self.ncbi),                  # GEO (processed/matrix/raw)
+                PaperDataAvailabilitySearcher(self.ncbi, self.llm),  # 文献 data availability
+                PlantSpecialtySearcher(),                    # scPlantDB/PlantSC 等专用库
+                ArrayExpressSearcher(),                      # EBI ArrayExpress
+                OmicSeekSearcher(),                          # OmicSeek (可达时)
+            ]
         self.searchers = {s.name: s for s in searchers}
 
     # ---------- 自然语言 -> ParsedQuery ----------
@@ -273,13 +405,20 @@ class DataSearcher:
         t0 = time.time()
         pq = self.parse_query(user_query)
 
-        # 决定调用哪些检索器: source_hints 优先 + 默认 geo
+        # 决定调用哪些检索器: source_hints 优先 + 默认多源全面检索
         to_use = []
         for hint in pq.source_hints:
-            if hint in self.searchers and self.searchers[hint] not in to_use:
-                to_use.append(self.searchers[hint])
-        if self.searchers["geo"] not in to_use:
-            to_use.append(self.searchers["geo"])  # GEO 始终作为主通道
+            # source_hints 别名归一
+            hint_map = {"geos": "geo", "pubmed": "paper_data", "scplantdb": "plant_specialty",
+                        "plant": "plant_specialty", "arrayexpress": "arrayexpress",
+                        "ebi": "arrayexpress", "omicseek": "omicseek"}
+            key = hint_map.get(hint, hint)
+            if key in self.searchers and self.searchers[key] not in to_use:
+                to_use.append(self.searchers[key])
+        # 默认: GEO + 文献data availability + 植物专用库 (三源全面检索)
+        for default_name in ("geo", "paper_data", "plant_specialty"):
+            if self.searchers.get(default_name) and self.searchers[default_name] not in to_use:
+                to_use.append(self.searchers[default_name])
         # 若无 hint, 也尝试 ArrayExpress(若可用)
         if not pq.source_hints and "arrayexpress" in self.searchers:
             to_use.append(self.searchers["arrayexpress"])

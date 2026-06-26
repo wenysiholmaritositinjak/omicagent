@@ -21,10 +21,10 @@ EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
 
 
 class NCBIClient:
-    def __init__(self, api_key: Optional[str] = None, min_interval: float = 0.34):
-        # 无 key 限 ~3 req/s (0.34s 间隔); 有 key 可 0.11s
+    def __init__(self, api_key: Optional[str] = None, min_interval: float = 0.4):
+        # 无 key 限 ~2.5 req/s (0.4s 间隔, 留余量避 429); 有 key 可 0.12s
         self.api_key = api_key
-        self.min_interval = min_interval if not api_key else 0.11
+        self.min_interval = min_interval if not api_key else 0.12
         self._last = 0.0
 
     def _params(self, extra: dict) -> dict:
@@ -99,10 +99,50 @@ class NCBIClient:
                                                   "rettype": "abstract", "retmode": "text"}),
                              timeout=30)
             r.raise_for_status()
+            r.encoding = "utf-8"
             return r.text.strip()
         except Exception as e:
             log.warning("取 pubmed 摘要失败 %s: %s", pmid, e)
             return ""
+
+    def fetch_pubmed_fulltext(self, pmid: str) -> str:
+        """取 pubmed 完整记录 (含摘要 + 数据可用性声明, retmode=xml 解析纯文本)."""
+        self._throttle()
+        try:
+            r = requests.get(f"{EUTILS}/efetch.fcgi",
+                             params=self._params({"db": "pubmed", "id": pmid,
+                                                  "rettype": "abstract", "retmode": "xml"}),
+                             timeout=30)
+            r.raise_for_status()
+            r.encoding = "utf-8"
+            # 粗解析 XML: 去 tag 取文本 (含 AbstractText + AccessionNumberList 等)
+            import re as _re
+            txt = _re.sub(r"<[^>]+>", " ", r.text)
+            txt = _re.sub(r"\s+", " ", txt).strip()
+            return txt
+        except Exception as e:
+            log.warning("取 pubmed 全文失败 %s: %s", pmid, e)
+            return ""
+
+    # ---------- elink 关联 SRA (测序数据) ----------
+    def elink_sra(self, gds_uids: list[str]) -> dict:
+        """从 GEO gds uid 关联到 SRA (测序原始数据), 返回 {gds_uid: [sra_ids]}."""
+        return self.elink_target(gds_uids, "sra")
+
+    def elink_target(self, ids: list[str], target_db: str) -> dict:
+        """从 ids 关联到 target_db, 返回 {src_id: [target_ids]}."""
+        if not ids:
+            return {}
+        data = self._get(f"{EUTILS}/elink.fcgi",
+                         self._params({"dbfrom": "gds", "db": target_db, "id": ",".join(ids)}))
+        out = {}
+        for ls in data.get("linksets", []) or []:
+            src = str(ls.get("ids", [""])[0])
+            tgt = []
+            for ldb in ls.get("linksetdbs", []) or []:
+                tgt.extend([str(x) for x in ldb.get("links", [])])
+            out[src] = tgt
+        return out
 
     # ---------- 高层: GEO DataSets 检索 ----------
     def search_geo(self, term: str, retmax: int = 10) -> list[dict]:
@@ -237,3 +277,58 @@ def _human_size(n: int) -> str:
             return f"{n:.1f}{u}" if u != "B" else f"{n}B"
         n /= 1024
     return f"{n:.1f}P"
+
+
+# ---------- 数据可用性链接提取 (从文献全文) ----------
+# 已知数据库 accession/URL 模式
+_DATA_PATTERNS = [
+    ("GEO", re.compile(r"(GSE\d{4,8})")),
+    ("SRA", re.compile(r"((?:SRP|SRR|SRX|PRJNA|PRJDB|PRJEB)\d{4,})")),
+    ("ArrayExpress", re.compile(r"(E-\w+-\d{3,})")),
+    ("Zenodo", re.compile(r"(https?://zenodo\.org/record/\d+)")),
+    ("figshare", re.compile(r"(https?://\w*figshare\.com/\S+?)(?:[\s.)]|$)")),
+    ("Dryad", re.compile(r"(https?://datadryad\.org/\S+?)(?:[\s.)]|$)")),
+    ("GenomeWeb/BGI-STOmics", re.compile(r"(https?://\w*(?:stomics|cngb|genomics\.cn)\S+?)(?:[\s.)]|$)")),
+    ("Single_Cell_Portal", re.compile(r"(https?://singlecell\.broadinstitute\.org/\S+?)(?:[\s.)]|$)")),
+    ("HCA", re.compile(r"(https?://data\.humancellatlas\.org/\S+?)(?:[\s.)]|$)") if False else None),
+    ("Generic_URL", re.compile(r"(https?://\S+?(?:download|data|suppl|repository|accession)\S*?)(?:[\s.)]|$)")),
+]
+
+_AVAIL_KEYWORDS = ("data availability", "data access", "data deposition", "data deposit",
+                   "accession number", "accession code", "deposited in", "available at",
+                   "data have been deposited", "publicly available")
+
+
+def extract_data_links(text: str) -> list[dict]:
+    """从文献全文/摘要提取数据可用性声明中的数据链接与 accession.
+
+    返回 [{db, value, source}]. 策略: 优先扫 data availability 段; 无命中则全文扫描.
+    """
+    if not text:
+        return []
+    low = text.lower()
+    # 1. 定位 data availability 段落 (关键词附近 ±800 字符)
+    snippets = []
+    for kw in _AVAIL_KEYWORDS:
+        idx = low.find(kw)
+        if idx != -1:
+            snippets.append(text[max(0, idx - 200): idx + 800])
+    region = " ".join(snippets) if snippets else ""
+    # 2. 去重提取
+    seen, out = set(), []
+    pats = [(d, p) for d, p in _DATA_PATTERNS if p is not None]
+    for db, pat in pats:
+        for m in (pat.findall(region) if region and pat else []):
+            val = m.strip().rstrip(",.;:)")
+            if val and val not in seen and len(val) < 200:
+                seen.add(val)
+                out.append({"db": db, "value": val, "source": "availability_section"})
+    # 3. 若段落无命中, 全文扫描 (摘要里常直接写 "data at GSE12345")
+    if not out:
+        for db, pat in pats:
+            for m in pat.findall(text) if pat else []:
+                val = m.strip().rstrip(",.;:)")
+                if val and val not in seen and len(val) < 200:
+                    seen.add(val)
+                    out.append({"db": db, "value": val, "source": "fulltext_scan"})
+    return out
