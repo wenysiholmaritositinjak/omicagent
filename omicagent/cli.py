@@ -17,6 +17,9 @@ os.environ.setdefault("PYTHONIOENCODING", "utf-8")
 
 from rich.console import Console
 from rich.panel import Panel
+from prompt_toolkit import PromptSession
+from prompt_toolkit.history import InMemoryHistory
+from prompt_toolkit.formatted_text import HTML
 from rich.markdown import Markdown
 from rich.prompt import Prompt
 from rich.live import Live
@@ -100,11 +103,12 @@ def main():
                       language=cfg.language,
                       on_event=lambda k, d: _render_event(k, d))
 
-    # 3. REPL
+    # 3. REPL (用 prompt_toolkit 支持光标移动/历史/删除等行编辑)
     _banner(cfg)
+    session = PromptSession(history=InMemoryHistory())
     while True:
         try:
-            user_input = console.input("\n[bold cyan]>[/] ").strip()
+            user_input = session.prompt(HTML("<ansicyan><b>&gt;</b></ansicyan> ")).strip()
         except (EOFError, KeyboardInterrupt):
             console.print("\n[dim]再见[/]")
             break
