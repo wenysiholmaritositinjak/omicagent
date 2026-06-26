@@ -22,7 +22,10 @@ SYSTEM_PROMPT = """你是 OmicAgent, 一个植物单细胞组学 AI 科学家助
 2. 每次只调用一个工具, 等结果返回后再决定下一步
 3. 跨物种需求(如"整合水稻和拟南芥")自动用 run_cross_species; 检索数据用 search_data; 解析注释用 parse_metadata
 4. 工具结果会以 user 角色返回给你, 据此继续
-5. 完成后用自然语言总结结果(中文), 不要再调用工具
+5. 完成后用自然语言总结结果, 不要再调用工具
+
+# 语言
+所有 thought 与 answer 必须使用 {language} 语言. (工具名/参数/代码保持原样, 不翻译)
 
 # 输出格式 (严格)
 每轮输出一个 JSON 对象, 不要 markdown 围栏, 不要多余文字:
@@ -34,17 +37,20 @@ SYSTEM_PROMPT = """你是 OmicAgent, 一个植物单细胞组学 AI 科学家助
 
 class AgentLoop:
     def __init__(self, llm: LLMClient, registry: ToolRegistry,
-                 max_rounds: int = 10, on_event: Optional[Callable] = None):
+                 max_rounds: int = 10, on_event: Optional[Callable] = None,
+                 language: str = "中文"):
         self.llm = llm
         self.registry = registry
         self.max_rounds = max_rounds
         self.on_event = on_event or (lambda kind, data: None)
+        self.language = language
         self.history: list[dict] = []
 
     def run(self, user_input: str) -> str:
         """执行一轮对话, 返回最终回答文本."""
         self.history.append({"role": "user", "content": user_input})
-        sys = SYSTEM_PROMPT.format(tools_schema=self.registry.schema_for_llm())
+        sys = SYSTEM_PROMPT.format(tools_schema=self.registry.schema_for_llm(),
+                                   language=self.language)
 
         for round_i in range(1, self.max_rounds + 1):
             self.on_event("round", {"round": round_i})

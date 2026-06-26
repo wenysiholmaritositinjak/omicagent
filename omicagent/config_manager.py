@@ -48,6 +48,7 @@ class UserConfig:
     data_dir: str = str(Path.home() / "bioinfo" / "data")
     results_dir: str = str(Path.home() / "bioinfo" / "results")
     max_tool_rounds: int = 10
+    language: str = "中文"  # 界面与回复语言
 
     def to_toml(self) -> str:
         return toml.dumps({
@@ -55,8 +56,12 @@ class UserConfig:
             "models": {"simple": self.simple_model, "complex": self.complex_model,
                        "fallback": self.fallback_model},
             "paths": {"data_dir": self.data_dir, "results_dir": self.results_dir},
-            "runtime": {"max_tool_rounds": self.max_tool_rounds},
+            "runtime": {"max_tool_rounds": self.max_tool_rounds, "language": self.language},
         })
+
+
+# 支持的语言 (界面 + Agent 回复语言)
+LANGUAGES = ["中文", "English", "日本語", "한국어", "Français", "Deutsch", "Español", "Português", "Русский"]
 
 
 def load_config() -> Optional[UserConfig]:
@@ -79,6 +84,7 @@ def load_config() -> Optional[UserConfig]:
             data_dir=paths.get("data_dir", ""),
             results_dir=paths.get("results_dir", ""),
             max_tool_rounds=rt.get("max_tool_rounds", 10),
+            language=rt.get("language", "中文"),
         )
     except Exception:
         return None
@@ -138,11 +144,19 @@ def first_run_setup(console: Console) -> UserConfig:
     console.print("[bold]6. 选择回退模型 (复杂任务主模型失败时):[/]")
     fallback = _pick_model(console, models, "claude-opus-4-8")
 
-    cfg = UserConfig(provider=provider, api_base=api_base, api_key=api_key,
-                     simple_model=simple, complex_model=complex_m, fallback_model=fallback)
+    # 7. 选择语言
+    console.print("[bold]7. 选择界面与回复语言:[/]")
+    for i, lg in enumerate(LANGUAGES, 1):
+        console.print(f"  [cyan]{i}.[/] {lg}")
+    lc = Prompt.ask("选择", default="1", console=console)
+    language = LANGUAGES[int(lc) - 1] if lc.isdigit() and 1 <= int(lc) <= len(LANGUAGES) else "中文"
 
-    # 7. 测试连接
-    console.print("\n[bold]7. 测试连接...[/]")
+    cfg = UserConfig(provider=provider, api_base=api_base, api_key=api_key,
+                     simple_model=simple, complex_model=complex_m, fallback_model=fallback,
+                     language=language)
+
+    # 8. 测试连接
+    console.print("\n[bold]8. 测试连接...[/]")
     ok, msg = test_connection(api_base, api_key, complex_m)
     if ok:
         console.print(f"  [green]✓ {msg}[/]")
@@ -179,6 +193,8 @@ def edit_config(console: Console, cfg: UserConfig) -> UserConfig:
     cfg.complex_model = Prompt.ask("新复杂模型", default=cfg.complex_model, console=console)
     console.print(f"当前回退模型: [cyan]{cfg.fallback_model}[/]")
     cfg.fallback_model = Prompt.ask("新回退模型", default=cfg.fallback_model, console=console)
+    console.print(f"当前语言: [cyan]{cfg.language}[/]  可选: {', '.join(LANGUAGES)}")
+    cfg.language = Prompt.ask("新语言", default=cfg.language, console=console)
     save_config(cfg)
     console.print("[green]✓ 配置已更新[/]")
     return cfg

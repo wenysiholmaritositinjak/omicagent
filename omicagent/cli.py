@@ -23,13 +23,59 @@ from rich.live import Live
 from rich.text import Text
 
 from . import config
-from .config_manager import load_config, first_run_setup, edit_config, save_config, UserConfig
+from .config_manager import (load_config, first_run_setup, edit_config, save_config,
+                             UserConfig, LANGUAGES)
 from .llm_client import LLMClient
 from .tools import ToolRegistry
 from .agent import AgentLoop
 from .tool_dispatcher import ToolDispatcher
 
 console = Console()
+
+# 界面文案多语言 (轻量 i18n)
+I18N = {
+    "中文": {"tagline": "植物单细胞组学 AI Scientist",
+             "hint": "输入需求开始对话, /help 查看命令, /exit 退出",
+             "model": "模型", "data": "数据目录", "lang": "语言",
+             "lang_changed": "✓ 语言切换为", "unknown_cmd": "未知命令", "see_help": "(/help 查看命令)"},
+    "English": {"tagline": "Plant Single-cell Omics AI Scientist",
+                "hint": "Type your request, /help for commands, /exit to quit",
+                "model": "Model", "data": "Data dir", "lang": "Language",
+                "lang_changed": "✓ Language switched to", "unknown_cmd": "Unknown command", "see_help": "(/help for commands)"},
+    "日本語": {"tagline": "植物シングルセルオミクス AI Scientist",
+              "hint": "要求を入力, /help でコマンド, /exit で終了",
+              "model": "モデル", "data": "データ_dir", "lang": "言語",
+              "lang_changed": "✓ 言語を切り替えました:", "unknown_cmd": "不明なコマンド", "see_help": "(/help でコマンド)"},
+    "한국어": {"tagline": "식물 단일세포 오믹스 AI Scientist",
+             "hint": "요청 입력, /help 명령어, /exit 종료",
+             "model": "모델", "data": "데이터 디렉토리", "lang": "언어",
+             "lang_changed": "✓ 언어 변경:", "unknown_cmd": "알 수 없는 명령", "see_help": "(/help 명령어)"},
+    "Français": {"tagline": "AI Scientist en omique monocellulaire végétale",
+                "hint": "Saisissez votre demande, /help pour commandes, /exit pour quitter",
+                "model": "Modèle", "data": "Répertoire données", "lang": "Langue",
+                "lang_changed": "✓ Langue changée à", "unknown_cmd": "Commande inconnue", "see_help": "(/help pour commandes)"},
+    "Deutsch": {"tagline": "Pflanzliche Single-Cell Omics AI Scientist",
+               "hint": "Anfrage eingeben, /help für Befehle, /exit zum Beenden",
+               "model": "Modell", "data": "Datenverzeichnis", "lang": "Sprache",
+               "lang_changed": "✓ Sprache geändert auf", "unknown_cmd": "Unbekannter Befehl", "see_help": "(/help für Befehle)"},
+    "Español": {"tagline": "AI Scientist de ómica unicelular vegetal",
+               "hint": "Escriba su solicitud, /help para comandos, /exit para salir",
+               "model": "Modelo", "data": "Directorio de datos", "lang": "Idioma",
+               "lang_changed": "✓ Idioma cambiado a", "unknown_cmd": "Comando desconocido", "see_help": "(/help para comandos)"},
+    "Português": {"tagline": "AI Scientist de ômica de célula única vegetal",
+                 "hint": "Digite seu pedido, /help para comandos, /exit para sair",
+                 "model": "Modelo", "data": "Diretório de dados", "lang": "Idioma",
+                 "lang_changed": "✓ Idioma alterado para", "unknown_cmd": "Comando desconhecido", "see_help": "(/help para comandos)"},
+    "Русский": {"tagline": "AI Scientist по растительной одноклеточной омике",
+               "hint": "Введите запрос, /help для команд, /exit для выхода",
+               "model": "Модель", "data": "Каталог данных", "lang": "Язык",
+               "lang_changed": "✓ Язык изменён на", "unknown_cmd": "Неизвестная команда", "see_help": "(/help для команд)"},
+}
+
+
+def _t(cfg: UserConfig, key: str) -> str:
+    """取当前语言文案."""
+    return I18N.get(cfg.language, I18N["中文"]).get(key, I18N["中文"][key])
 
 
 def main():
@@ -51,6 +97,7 @@ def main():
     dispatcher = ToolDispatcher(llm)
     registry = ToolRegistry(llm, dispatcher)
     agent = AgentLoop(llm, registry, max_rounds=cfg.max_tool_rounds,
+                      language=cfg.language,
                       on_event=lambda k, d: _render_event(k, d))
 
     # 3. REPL
@@ -91,10 +138,11 @@ def _apply_config(cfg: UserConfig):
 
 def _banner(cfg: UserConfig):
     console.print(Panel.fit(
-        f"[bold cyan]OmicAgent[/] v0.2.0  植物单细胞组学 AI Scientist\n"
-        f"[dim]模型:[/] {cfg.complex_model} (复杂) / {cfg.simple_model} (简单)\n"
-        f"[dim]数据目录:[/] {cfg.data_dir}\n"
-        f"[dim]输入需求开始对话, /help 查看命令, /exit 退出[/]",
+        f"[bold cyan]OmicAgent[/] v0.2.0  {_t(cfg, 'tagline')}\n"
+        f"[dim]{_t(cfg, 'model')}:[/] {cfg.complex_model} (complex) / {cfg.simple_model} (simple)\n"
+        f"[dim]{_t(cfg, 'data')}:[/] {cfg.data_dir}\n"
+        f"[dim]{_t(cfg, 'lang')}:[/] {cfg.language}\n"
+        f"[dim]{_t(cfg, 'hint')}[/]",
         border_style="cyan"))
 
 
@@ -135,12 +183,35 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
         console.print(Panel(
             "[cyan]/help[/] 显示帮助\n"
             "[cyan]/model [name][/] 切换复杂模型\n"
-            "[cyan]/config[/] 编辑配置 (API/模型)\n"
+            "[cyan]/lang [语言][/] 切换界面与回复语言 (中文/English/日本語/한국어/Français/Deutsch/Español/Português/Русский)\n"
+            "[cyan]/config[/] 编辑配置 (API/模型/语言)\n"
             "[cyan]/data [path][/] 设置/查看数据目录\n"
             "[cyan]/clear[/] 清空对话历史\n"
             "[cyan]/tools[/] 列出可用工具\n"
             "[cyan]/exit[/] 退出",
             title="命令", border_style="cyan"))
+    elif c == "/lang":
+        if arg:
+            # 直接指定语言名
+            lang = arg.strip()
+            if lang in LANGUAGES:
+                cfg.language = lang
+                agent.language = lang
+                save_config(cfg)
+                console.print(f"[green]{_t(cfg, 'lang_changed')} {lang}[/]")
+            else:
+                console.print(f"[yellow]不支持的语言: {lang}. 可选: {', '.join(LANGUAGES)}[/]")
+        else:
+            console.print(f"当前语言: [cyan]{cfg.language}[/]")
+            for i, lg in enumerate(LANGUAGES, 1):
+                mark = "✓" if lg == cfg.language else " "
+                console.print(f"  {mark} [cyan]{i}.[/] {lg}")
+            choice = Prompt.ask("选择", default=str(LANGUAGES.index(cfg.language) + 1), console=console)
+            if choice.isdigit() and 1 <= int(choice) <= len(LANGUAGES):
+                cfg.language = LANGUAGES[int(choice) - 1]
+                agent.language = cfg.language
+                save_config(cfg)
+                console.print(f"[green]{_t(cfg, 'lang_changed')} {cfg.language}[/]")
     elif c == "/model":
         if arg:
             cfg.complex_model = arg
@@ -172,7 +243,7 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
         registry = ToolRegistry()
         console.print(registry.schema_for_llm())
     else:
-        console.print(f"[yellow]未知命令: {c} (/help 查看命令)[/]")
+        console.print(f"[yellow]{_t(cfg, 'unknown_cmd')}: {c} {_t(cfg, 'see_help')}[/]")
     return False
 
 
