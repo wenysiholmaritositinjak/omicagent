@@ -192,6 +192,8 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
             "[cyan]/data [path][/] 设置/查看数据目录\n"
             "[cyan]/catalog [物种][/] 列出已知数据库目录 (植物/人类/脑等)\n"
             "[cyan]/update-catalog[/] 网络刷新数据库目录可用性\n"
+            "[cyan]/recipes[/] 列出环境构建配方 (seurat4/samap/saturn等, 固化避坑经验)\n"
+            "[cyan]/build-env <配方>[/] 按配方构建生信环境 (如 /build-env seurat4)\n"
             "[cyan]/clear[/] 清空对话历史\n"
             "[cyan]/tools[/] 列出可用工具\n"
             "[cyan]/exit[/] 退出",
@@ -216,6 +218,50 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
         from .db_catalog import update_catalog
         r = update_catalog()
         console.print(f"[green]✓ 已刷新 {r['checked']} 个库, {r['available']} 个可用 (版本 {r['version']})[/]")
+    elif c == "/recipes":
+        from .env_recipes import list_recipes
+        from rich.table import Table
+        t = Table(title="环境构建配方 (固化避坑经验)", show_lines=False)
+        for col in ["配方", "语言", "说明", "版本", "避坑数"]:
+            t.add_column(col, style="cyan" if col == "配方" else None)
+        for r in list_recipes():
+            t.add_row(r["name"], r["language"], r["desc"][:45],
+                      ", ".join(f"{k}={v}" for k, v in list(r["versions"].items())[:2]),
+                      str(r["pitfalls_count"]))
+        console.print(t)
+        console.print("[dim]用 /build-env <配方名> 构建, 如 /build-env seurat4[/]")
+    elif c == "/build-env":
+        if not arg:
+            console.print("[yellow]用法: /build-env <配方名> (如 seurat4/samap/saturn/scanpy/seurat5)[/]")
+            return False
+        from .env_recipes import get_recipe
+        try:
+            recipe = get_recipe(arg.strip())
+        except ValueError as e:
+            console.print(f"[red]{e}[/]")
+            return False
+        console.print(Panel.fit(
+            f"[bold cyan]按配方构建: {recipe.name}[/]\n{recipe.desc}\n"
+            f"[dim]版本: {recipe.versions}[/]",
+            border_style="cyan"))
+        # 打印避坑提示
+        if recipe.pitfalls:
+            console.print("\n[bold yellow]⚠ 已知坑 (已规避):[/]")
+            for p in recipe.pitfalls:
+                console.print(f"  [yellow]•[/] {p}")
+        console.print(f"\n[cyan]开始构建 ({len(recipe.steps)} 步)...[/]")
+        from .env_builder import EnvBuilder
+        eb = EnvBuilder()
+        result = eb.build_with_recipe(arg.strip())
+        # 结果
+        ok_steps = sum(1 for s in result["steps_run"] if s["success"])
+        console.print(f"\n[green]✓ 构建完成: {ok_steps}/{len(result['steps_run'])} 步成功[/]")
+        console.print("[bold]验证:[/]")
+        for v in result["verify"]:
+            mark = "[green]✓[/]" if v["success"] else "[red]✗[/]"
+            console.print(f"  {mark} {v['check']}: {v['output']}")
+        if recipe.notes:
+            console.print(f"[dim]参考: {recipe.notes}[/]")
     elif c == "/lang":
         if arg:
             # 直接指定语言名

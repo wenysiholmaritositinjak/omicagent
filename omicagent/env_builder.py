@@ -253,3 +253,70 @@ class EnvBuilder:
         if tool not in TOOL_PACKAGE_MAP:
             raise ValueError(f"未知工具: {tool}, 可选: {list(TOOL_PACKAGE_MAP)}")
         return self._build_spec([tool])
+
+    # ---------- 按配方构建 (固化经验, 避坑) ----------
+    def build_with_recipe(self, recipe_name: str, env_name: str = "",
+                          timeout: int = 3600) -> dict:
+        """按固化配方构建环境, 避开已知坑. 返回 {recipe, steps_run, pitfalls, verify}.
+
+        recipe_name: seurat4 / seurat5 / samap / saturn / scanpy
+        env_name: 自定义 env 名 (默认用配方名)
+        """
+        from .env_recipes import get_recipe
+        recipe = get_recipe(recipe_name)
+        env = env_name or recipe.name
+        log.info("按配方构建: %s (env=%s)", recipe.name, env)
+
+        # 1. 打印避坑提示 (重要: 让用户知道为什么这么装)
+        pitfalls_text = "\n".join(f"  ⚠ {p}" for p in recipe.pitfalls)
+
+        # 2. 执行构建步骤
+        steps_run = []
+        for i, step in enumerate(recipe.steps, 1):
+            # R 命令 vs shell 命令
+            if step.startswith("install.packages") or step.startswith("BiocManager") or \
+               step.startswith("remotes::") or step.startswith("remove.packages"):
+                # R 命令: 用 Rscript -e 执行 (在指定 R env 里, 默认 seurat)
+                r_env = "seurat" if recipe.language == "r" else env
+                cmd = f"conda run -n {r_env} Rscript -e '{step}'" if _env_exists(r_env) else f"Rscript -e '{step}'"
+            elif step.startswith("conda "):
+                cmd = step  # conda activate 不在子进程生效, 跳过 activate 行
+                if "activate" in step:
+                    continue
+            elif step.startswith("pip "):
+                cmd = f"conda run -n {env} {step}" if _env_exists(env) else step
+            else:
+                cmd = step
+            log.info("[配方 %d] %s", i, cmd)
+            r = self.dispatcher.run_shell(cmd, timeout=timeout)
+            steps_run.append({"step": i, "cmd": cmd, "success": r.success,
+                              "tail": (r.stdout + r.stderr)[-400:]})
+            if not r.success:
+                log.warning("步骤 %d 失败, 继续尝试后续 (可能部分依赖已满足)", i)
+
+        # 3. 验证
+        verify_results = []
+        for v in recipe.verify:
+            if recipe.language == "r":
+                r_env = "seurat" if _env_exists("seurat") else env
+                cmd = f"conda run -n {r_env} Rscript -e 'cat({v}, \"\\n\")'" if _env_exists(r_env) else f"Rscript -e 'cat({v})'"
+            else:
+                cmd = f"conda run -n {env} {v}" if _env_exists(env) else v
+            r = self.dispatcher.run_shell(cmd, timeout=120)
+            verify_results.append({"check": v, "output": r.stdout.strip()[-100:], "success": r.success})
+
+        return {
+            "recipe": recipe.name, "env": env, "desc": recipe.desc,
+            "versions": recipe.versions, "steps_run": steps_run,
+            "verify": verify_results,
+            "pitfalls": recipe.pitfalls, "pitfalls_text": pitfalls_text,
+            "notes": recipe.notes,
+        }
+
+
+def _env_exists(name: str) -> bool:
+    """检查 conda env 是否存在."""
+    import subprocess
+    r = subprocess.run(f"conda env list 2>/dev/null | awk '{{print $1}}' | grep -qx '{name}'",
+                       shell=True, capture_output=True)
+    return r.returncode == 0

@@ -52,6 +52,13 @@ class ToolRegistry:
             self._update_catalog, max_result_chars=2000,
         ))
         self.register(ToolDef(
+            "build_env_recipe",
+            "按固化配方构建生信环境(避坑): seurat4(4.4.0,生信人员习惯)/seurat5(最新,需patch)/samap(跨物种BLAST)/saturn(ESM嵌入)/scanpy(基础). 返回构建步骤+验证+避坑提示.",
+            {"recipe": {"type": "string", "description": "配方名: seurat4/seurat5/samap/saturn/scanpy", "required": True},
+             "env_name": {"type": "string", "description": "自定义 env 名(可选)", "required": False}},
+            self._build_env_recipe, max_result_chars=4000,
+        ))
+        self.register(ToolDef(
             "list_local_data",
             "列出本地可用的单细胞 h5ad 数据文件 (供跨物种分析等使用). 无参数.",
             {},
@@ -184,6 +191,16 @@ class ToolRegistry:
             return {"action": "add", **r}
         r = cat.update_catalog()
         return {"action": "refresh", **r}
+
+    def _build_env_recipe(self, recipe, env_name=""):
+        from .env_builder import EnvBuilder
+        eb = EnvBuilder(self.llm, self.dispatcher)
+        result = eb.build_with_recipe(recipe, env_name=env_name)
+        return {"recipe": result["recipe"], "env": result["env"], "desc": result["desc"],
+                "versions": result["versions"],
+                "steps_run": [{"step": s["step"], "success": s["success"]} for s in result["steps_run"]],
+                "verify": result["verify"],
+                "pitfalls": result["pitfalls"], "notes": result["notes"]}
 
     def _download_data(self, accession, dest=None, file_type="processed", max_size_gb=5):
         """下载数据, 优先 processed; 超过 max_size_gb 返回确认提示不下载."""
