@@ -187,6 +187,13 @@ def edit_config(console: Console, cfg: UserConfig) -> UserConfig:
     """交互编辑配置 (/config 命令)."""
     console.print(f"当前 API base: [cyan]{cfg.api_base}[/]")
     cfg.api_base = Prompt.ask("新 API base", default=cfg.api_base, console=console)
+    # API key: 显示掩码, 回车跳过保持不变, 输入新值则更新
+    masked = (cfg.api_key[:6] + "..." + cfg.api_key[-4:]) if len(cfg.api_key) > 12 else "***"
+    console.print(f"当前 API key: [cyan]{masked}[/]")
+    new_key = Prompt.ask("新 API key (回车跳过保持不变)", password=True, default="", console=console)
+    if new_key.strip():
+        cfg.api_key = new_key.strip()
+        console.print("[green]✓ API key 已更新[/]")
     console.print(f"当前简单模型: [cyan]{cfg.simple_model}[/]")
     cfg.simple_model = Prompt.ask("新简单模型", default=cfg.simple_model, console=console)
     console.print(f"当前复杂模型: [cyan]{cfg.complex_model}[/]")

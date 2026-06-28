@@ -137,8 +137,9 @@ class AgentLoop:
         except Exception as e:
             log.exception("LLM 流式失败")
             self.on_event("error", {"text": str(e)})
-            # 退化为非流式
-            resp = self.llm.complete("", task_type="complex", system=system, history=self.history)
+            # 退化为非流式: complete() 不支持 history 参数, 把历史拼进 prompt
+            msgs = "\n".join(f"[{m['role']}]\n{m['content']}" for m in self.history)
+            resp = self.llm.complete(msgs, task_type="complex", system=system)
             parts = [resp.content]
         return "".join(parts)
 
