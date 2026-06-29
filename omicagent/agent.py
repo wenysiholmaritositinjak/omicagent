@@ -40,6 +40,11 @@ search_data 返回每条的 data_type/total_size/has_processed/files/organs. 向
 检索流程: 优先查 catalog 里有 API 的库(GEO/PubMed/ArrayExpress/HCA 等已内置, 快) → 再网络补充.
 用户要求更新库目录时调 update_database_catalog (无参=刷新可用性, 带参=追加新库).
 
+# 本地数据集目录优先 (scPlantDB 67个植物单细胞数据集, 含 h5ad+rds)
+检索植物单细胞数据时, search_data 会优先匹配本地 scPlantDB 目录(已知数据, 含 h5ad+rds 下载入口, 快).
+用户问"有哪些已知数据/本地数据集"时调 list_local_datasets (可按物种/组织过滤).
+报告时标注数据格式(h5ad/rds)与细胞数.
+
 # 语言
 所有 thought 与 answer 必须使用 {language} 语言. (工具名/参数/代码保持原样, 不翻译)
 

@@ -59,6 +59,15 @@ class ToolRegistry:
             self._build_env_recipe, max_result_chars=4000,
         ))
         self.register(ToolDef(
+            "list_local_datasets",
+            "列出本地已知数据集目录 (scPlantDB 67个植物单细胞数据集, 含 h5ad+rds 格式). 可按物种/组织/关键词过滤. 这些数据已含下载入口, 命中即直接可用.",
+            {"species": {"type": "string", "description": "物种过滤, 如 'Arabidopsis'/'Oryza'", "required": False},
+             "tissue": {"type": "string", "description": "组织过滤, 如 'root'/'leaf'", "required": False},
+             "keyword": {"type": "string", "description": "关键词", "required": False},
+             "topk": {"type": "integer", "description": "返回数, 默认10", "required": False}},
+            self._list_local_datasets, max_result_chars=4000,
+        ))
+        self.register(ToolDef(
             "list_local_data",
             "列出本地可用的单细胞 h5ad 数据文件 (供跨物种分析等使用). 无参数.",
             {},
@@ -201,6 +210,14 @@ class ToolRegistry:
                 "steps_run": [{"step": s["step"], "success": s["success"]} for s in result["steps_run"]],
                 "verify": result["verify"],
                 "pitfalls": result["pitfalls"], "notes": result["notes"]}
+
+    def _list_local_datasets(self, species="", tissue="", keyword="", topk=10):
+        from .local_datasets import search_local_datasets, list_local_datasets_summary
+        if not (species or tissue or keyword):
+            return {"summary": list_local_datasets_summary()}
+        hits = search_local_datasets(species=species, tissue=tissue, keyword=keyword, topk=topk)
+        return {"n_hits": len(hits), "datasets": hits,
+                "note": "scPlantDB 数据集同时提供 h5ad 和 rds 格式"}
 
     def _download_data(self, accession, dest=None, file_type="processed", max_size_gb=5):
         """下载数据, 优先 processed; 超过 max_size_gb 返回确认提示不下载."""

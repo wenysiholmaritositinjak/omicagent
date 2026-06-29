@@ -63,4 +63,4 @@ omicagent = "omicagent.cli:main"
 packages = ["omicagent", "omicagent.templates", "omicagent.data"]
 
 [tool.setuptools.package-data]
-omicagent = ["templates/*.j2", "data/*.json"]
+omicagent = ["templates/*.j2", "data/*.json", "data/*.xlsx"]

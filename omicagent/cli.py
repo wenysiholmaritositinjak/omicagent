@@ -194,6 +194,7 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
             "[cyan]/update-catalog[/] 网络刷新数据库目录可用性\n"
             "[cyan]/recipes[/] 列出环境构建配方 (seurat4/samap/saturn等, 固化避坑经验)\n"
             "[cyan]/build-env <配方>[/] 按配方构建生信环境 (如 /build-env seurat4)\n"
+            "[cyan]/local-data [物种/组织][/] 列出本地已知数据集 (scPlantDB 67个, 含h5ad+rds)\n"
             "[cyan]/clear[/] 清空对话历史\n"
             "[cyan]/tools[/] 列出可用工具\n"
             "[cyan]/exit[/] 退出",
@@ -230,6 +231,26 @@ def _handle_slash(cmd: str, cfg: UserConfig, agent: AgentLoop) -> bool:
                       str(r["pitfalls_count"]))
         console.print(t)
         console.print("[dim]用 /build-env <配方名> 构建, 如 /build-env seurat4[/]")
+    elif c == "/local-data":
+        from .local_datasets import search_local_datasets, list_local_datasets_summary
+        if not arg:
+            s = list_local_datasets_summary()
+            console.print(Panel.fit(
+                f"[bold]本地数据集目录[/] (scPlantDB)\n"
+                f"共 {s.get('n',0)} 个数据集, 格式: {s.get('formats',[])}\n"
+                f"物种: {', '.join(f'{k}({v})' for k,v in s.get('species',{}).items())}",
+                border_style="cyan"))
+        else:
+            hits = search_local_datasets(keyword=arg, topk=15)
+            from rich.table import Table
+            t = Table(title=f"匹配 '{arg}' 的本地数据集 (共 {len(hits)})", show_lines=False)
+            for col in ["accession", "species", "tissue", "cells", "publication"]:
+                t.add_column(col, style="cyan" if col == "accession" else None)
+            for d in hits:
+                t.add_row(d.get("accession",""), d.get("species","")[:20], d.get("tissue","")[:18],
+                          str(d.get("n_cells","")), d.get("publication","")[:30])
+            console.print(t)
+            console.print("[dim]这些数据集同时提供 h5ad 和 rds 格式, scPlantDB 站内下载[/]")
     elif c == "/build-env":
         if not arg:
             console.print("[yellow]用法: /build-env <配方名> (如 seurat4/samap/saturn/scanpy/seurat5)[/]")

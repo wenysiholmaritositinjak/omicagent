@@ -454,6 +454,35 @@ class DataSearcher:
         all_recs: list[DatasetRecord] = []
         sources_ok = []
 
+        # 优先: 本地数据集目录 (scPlantDB 已知数据, 含 h5ad/rds, 无需网络)
+        try:
+            from .local_datasets import search_local_datasets
+            local_hits = search_local_datasets(species=pq.species, tissue=pq.tissue,
+                                               keyword=" ".join(pq.keywords), topk=topk)
+            if local_hits:
+                sources_ok.append("local_scplantdb")
+                for d in local_hits:
+                    all_recs.append(DatasetRecord(
+                        title=f"[scPlantDB] {d.get('species','')} {d.get('tissue','')} ({d.get('n_cells',0)} cells)",
+                        accession=d.get("accession", ""),
+                        source_db="scPlantDB-local",
+                        species=d.get("species", ""),
+                        n_samples=d.get("n_experiments", 0),
+                        modality="scRNA-seq",
+                        summary=f"{d.get('publication','')} | {d.get('library','')} | age: {d.get('age','')}",
+                        download_url=d.get("download_url", ""),
+                        pubmed_id="",
+                        data_type="processed",  # h5ad+rds 都是 processed
+                        has_processed=True,
+                        metadata={"sra": d.get("sra_accession"), "n_cells": d.get("n_cells"),
+                                  "tissue": d.get("tissue"), "formats": d.get("data_types"),
+                                  "match_score": d.get("_match_score", 0)},
+                    ))
+                sources_tried.insert(0, "local_scplantdb")
+                log.info("[local_scplantdb] 命中 %d 条已知数据集", len(local_hits))
+        except Exception as e:
+            log.debug("本地目录检索失败: %s", e)
+
         # 并行调用各检索器
         with ThreadPoolExecutor(max_workers=min(4, len(to_use))) as ex:
             fut = {ex.submit(s.search, pq, topk): s for s in to_use}
