@@ -1,0 +1,513 @@
+{
+  "source": "scPlantDB (https://biobigdata.nju.edu.cn/scplantdb/)",
+  "source_note": "从 scPlantDB 前端 app.js 内嵌常量扒取的细胞类型命名全集 (Cell type Comparator UI 选项), 跨物种多组织, 作为注释统一 ref",
+  "extracted_at": "2026-06-29",
+  "n_celltypes": 80,
+  "celltypes": [
+    {
+      "name": "Abaxial epidermis",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Adaxial epidermis",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Adaxial meristem periphery",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Branch meristem",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Bundle sheath",
+      "tissue_hint": [
+        "leaf",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Companion cell",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Contaminating nuclei",
+      "tissue_hint": [
+        "reproductive"
+      ]
+    },
+    {
+      "name": "Cork cambium",
+      "tissue_hint": [
+        "meristem"
+      ]
+    },
+    {
+      "name": "Cortex",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Ear meristem",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Endodermis",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Epidermis",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Explant vasculature and callus founder cell",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Fiber cell",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Flower meristem",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Generative nuclei",
+      "tissue_hint": [
+        "reproductive"
+      ]
+    },
+    {
+      "name": "Ground tissue",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Guard cell",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Idioblast cell",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Infected cell",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Inflorescence meristem",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Initial cell",
+      "tissue_hint": [
+        "meristem"
+      ]
+    },
+    {
+      "name": "Inner cell layer",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Inner cortex",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Leaf epidermis",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Leaf guard cell",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Leaf marginal meristem",
+      "tissue_hint": [
+        "leaf",
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Leaf pavement cell",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Leaf subsidiary cell",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Meristem base",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Meristem boundary",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Meristem epidermis",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Meristematic cell",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Mesophyll",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Metaxylem",
+      "tissue_hint": [
+        "root",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Microspore nuclei",
+      "tissue_hint": [
+        "reproductive"
+      ]
+    },
+    {
+      "name": "Middle cell layer",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Nucellus",
+      "tissue_hint": [
+        "reproductive"
+      ]
+    },
+    {
+      "name": "Outer cell layer",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Outer cortex",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Outer pigment layer",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Palisade mesophyll",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Parenchyma",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Pavement cell-A",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Pavement cell-N",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Pericycle",
+      "tissue_hint": [
+        "root"
+      ]
+    },
+    {
+      "name": "Phloem",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Phloem parenchyma",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Phloem pole pericycle",
+      "tissue_hint": [
+        "root",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Photosynthetic cell",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Procambium",
+      "tissue_hint": [
+        "meristem"
+      ]
+    },
+    {
+      "name": "Protophloem",
+      "tissue_hint": [
+        "root",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Protoxylem",
+      "tissue_hint": [
+        "root",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Provascular",
+      "tissue_hint": [
+        "meristem",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Proximal meristem",
+      "tissue_hint": [
+        "root",
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Ray parenchyma",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Root cortex",
+      "tissue_hint": [
+        "root"
+      ]
+    },
+    {
+      "name": "Root endodermis",
+      "tissue_hint": [
+        "root"
+      ]
+    },
+    {
+      "name": "Root epidermis",
+      "tissue_hint": [
+        "root"
+      ]
+    },
+    {
+      "name": "Root procambium",
+      "tissue_hint": [
+        "root",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Root stele",
+      "tissue_hint": [
+        "root"
+      ]
+    },
+    {
+      "name": "Sclerenchyma",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Secretory tissue",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Shoot apical meristem",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Shoot axis apex",
+      "tissue_hint": [
+        "stem"
+      ]
+    },
+    {
+      "name": "Shoot system epidermis",
+      "tissue_hint": [
+        "stem"
+      ]
+    },
+    {
+      "name": "Sperm nuclei",
+      "tissue_hint": [
+        "reproductive"
+      ]
+    },
+    {
+      "name": "Spikelet meristem",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Spongy mesophyll",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Stem cell niche",
+      "tissue_hint": [
+        "stem",
+        "meristem"
+      ]
+    },
+    {
+      "name": "Trichome",
+      "tissue_hint": [
+        "leaf"
+      ]
+    },
+    {
+      "name": "Uninfected cell",
+      "tissue_hint": [
+        "other"
+      ]
+    },
+    {
+      "name": "Vascular bundle",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Vascular cambium",
+      "tissue_hint": [
+        "meristem",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Vascular tissue",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Vegetative nuclei",
+      "tissue_hint": [
+        "reproductive"
+      ]
+    },
+    {
+      "name": "Xylem",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Xylem parenchyma",
+      "tissue_hint": [
+        "vascular"
+      ]
+    },
+    {
+      "name": "Xylem pole pericycle",
+      "tissue_hint": [
+        "root",
+        "vascular"
+      ]
+    },
+    {
+      "name": "Xylem precursor cell",
+      "tissue_hint": [
+        "vascular"
+      ]
+    }
+  ]
+}
