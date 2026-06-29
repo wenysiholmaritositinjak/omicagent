@@ -320,3 +320,70 @@ def _env_exists(name: str) -> bool:
     r = subprocess.run(f"conda env list 2>/dev/null | awk '{{print $1}}' | grep -qx '{name}'",
                        shell=True, capture_output=True)
     return r.returncode == 0
+
+
+def list_envs() -> list[dict]:
+    """列出所有 conda 环境 + 检测关键能力 (已有环境记忆, 优先复用).
+
+    返回 [{name, language, tools, has_seurat, has_scanpy, has_samap, has_saturn}]
+    """
+    import subprocess
+    r = subprocess.run("conda env list 2>/dev/null | grep -v '^#' | awk '{print $1}'",
+                       shell=True, capture_output=True, text=True)
+    envs = [e for e in r.stdout.split() if e and e != "base"]
+    out = []
+    for env in envs:
+        # 检测每个 env 的关键包
+        caps = _detect_env_caps(env)
+        out.append({"name": env, **caps})
+    return out
+
+
+def _detect_env_caps(env: str) -> dict:
+    """检测某 conda env 的能力 (含哪些关键包)."""
+    import subprocess
+    caps = {"language": "", "has_seurat": False, "has_scanpy": False,
+            "has_samap": False, "has_saturn": False, "tools": []}
+    # Python 能力
+    r = subprocess.run(f'conda run -n {env} python -c "import scanpy" 2>/dev/null',
+                       shell=True, capture_output=True)
+    if r.returncode == 0:
+        caps["has_scanpy"] = True; caps["language"] = "python"; caps["tools"].append("scanpy")
+    r = subprocess.run(f'conda run -n {env} python -c "import torch" 2>/dev/null',
+                       shell=True, capture_output=True)
+    if r.returncode == 0:
+        caps["has_saturn"] = True; caps["tools"].append("saturn")
+    r = subprocess.run(f'conda run -n {env} python -c "from samap import SAMAP" 2>/dev/null',
+                       shell=True, capture_output=True)
+    if r.returncode == 0:
+        caps["has_samap"] = True; caps["language"] = "python"; caps["tools"].append("samap")
+    # R 能力
+    r = subprocess.run(f'conda run -n {env} Rscript -e "library(Seurat)" 2>/dev/null',
+                       shell=True, capture_output=True)
+    if r.returncode == 0:
+        caps["has_seurat"] = True; caps["language"] = "r"; caps["tools"].append("seurat")
+    return caps
+
+
+def find_existing_env(language: str = "", tool: str = "") -> dict | None:
+    """检索已有 conda 环境, 找到能处理指定语言/工具的环境 (记忆复用).
+
+    language: 'r' / 'python'; tool: 'seurat' / 'scanpy' / 'samap' / 'saturn'
+    返回 {name, ...} 或 None (无则需构建).
+    """
+    envs = list_envs()
+    for env in envs:
+        if tool == "seurat" and env.get("has_seurat"):
+            return env
+        if tool == "scanpy" and env.get("has_scanpy"):
+            return env
+        if tool == "samap" and env.get("has_samap"):
+            return env
+        if tool == "saturn" and env.get("has_saturn"):
+            return env
+    # 按 language 兜底
+    if language:
+        for env in envs:
+            if env.get("language") == language:
+                return env
+    return None

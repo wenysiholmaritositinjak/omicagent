@@ -40,6 +40,15 @@ search_data 返回每条的 data_type/total_size/has_processed/files/organs. 向
 检索流程: 优先查 catalog 里有 API 的库(GEO/PubMed/ArrayExpress/HCA 等已内置, 快) → 再网络补充.
 用户要求更新库目录时调 update_database_catalog (无参=刷新可用性, 带参=追加新库).
 
+# 用户提供本地数据时的工作流程 (重要, 果断按序执行, 不要反复纠结)
+当用户提供数据文件路径(rds/h5ad)要求分析或跨物种整合时, 按此流程:
+1. **查环境**: 先调 list_envs 检索已构建的 conda 环境. 有匹配(R数据→seurat环境, Python数据→scagent/samap/saturn)直接复用; 无则 build_env_recipe 构建. 不要每次都建.
+2. **读数据**: 调 inspect_data(path) 自动按格式选 R(Seurat,读rds) 或 Python(Scanpy,读h5ad) 读取, 返回细胞数/基因数/obs注释列/基因名格式/物种推断.
+3. **查注释**: 从 inspect_data 结果确认细胞类型注释列是否存在; 若无, 用 parse_metadata 解析 obs.
+4. **基因组信息**: 跨物种整合需两物种蛋白序列. 优先根据用户提供的文献/DOI 获取; 文献无明确来源时, 询问用户提供基因组/蛋白fasta; 不要瞎猜.
+5. **信息齐全后运行**: 数据(h5ad)+注释(celltype)+蛋白序列(跨物种用) 齐全后, 调 run_cross_species 或 run_module. rds 需先转 h5ad (SeuratDisk, 见 01_data_prep/scripts).
+不要在 rds 前反复纠结工具选择 — 先 inspect_data 探明格式与注释, 再按流程走.
+
 # 本地数据集目录优先 (scPlantDB 67个植物单细胞数据集, 含 h5ad+rds)
 检索植物单细胞数据时, search_data 会优先匹配本地 scPlantDB 目录(已知数据, 含 h5ad+rds 下载入口, 快).
 用户问"有哪些已知数据/本地数据集"时调 list_local_datasets (可按物种/组织过滤).

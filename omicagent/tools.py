@@ -68,6 +68,18 @@ class ToolRegistry:
             self._list_local_datasets, max_result_chars=4000,
         ))
         self.register(ToolDef(
+            "list_envs",
+            "列出本地已构建的 conda 生信环境 (scagent/seurat/samap等) 及其能力(含seurat/scanpy/samap/saturn). 用户提供数据时先查此, 有匹配环境直接复用, 无则 build_env_recipe 构建.",
+            {},
+            self._list_envs, max_result_chars=2000,
+        ))
+        self.register(ToolDef(
+            "inspect_data",
+            "检查单细胞数据文件: 自动按扩展名选 R(h5seurat/rds,用Seurat) 或 Python(h5ad,用Scanpy) 读取(自动找已有conda环境), 返回 细胞数/基因数/obs注释列/基因名格式/物种推断. 用于跨物种整合前确认数据可用性.",
+            {"path": {"type": "string", "description": "数据文件路径 (h5ad/rds/Rds)", "required": True}},
+            self._inspect_data, max_result_chars=4000,
+        ))
+        self.register(ToolDef(
             "list_local_data",
             "列出本地可用的单细胞 h5ad 数据文件 (供跨物种分析等使用). 无参数.",
             {},
@@ -219,6 +231,72 @@ class ToolRegistry:
         return {"n_hits": len(hits), "datasets": hits,
                 "note": "scPlantDB 数据集同时提供 h5ad 和 rds 格式"}
 
+    def _list_envs(self):
+        from .env_builder import list_envs, find_existing_env
+        envs = list_envs()
+        return {"n_envs": len(envs), "envs": envs,
+                "note": "用户提供数据时, 先查此找匹配环境复用 (R数据→seurat, Python数据→scagent/samap/saturn)"}
+
+    def _inspect_data(self, path):
+        """检查数据文件: 自动选 R/Python 读取, 返回注释/基因名/物种推断."""
+        import os, tempfile
+        from .env_builder import find_existing_env
+        p = str(path)
+        ext = os.path.splitext(p)[1].lower()
+        # 自动选环境: rds → seurat(R), h5ad → scagent(Python)
+        if ext in (".rds", ".rds.gz"):
+            env = find_existing_env(language="r") or find_existing_env(tool="seurat")
+            if not env:
+                return {"error": "无 R+Seurat 环境, 先 /build-env seurat4", "path": p}
+            rscript = f'''
+library(Seurat)
+obj <- readRDS("{p}")
+cat("n_cells:", ncol(obj), "\\n")
+cat("n_genes:", nrow(obj), "\\n")
+cat("obs_cols:", paste(colnames(obj@meta.data), collapse=","), "\\n")
+cat("gene_examples:", paste(rownames(obj)[1:5], collapse=","), "\\n")
+for (col in colnames(obj@meta.data)) {{
+  vals <- unique(obj@meta.data[[col]])
+  if (length(vals) <= 30 && !is.numeric(vals)) {{
+    cat(col, "_vals:", paste(vals[1:min(8,length(vals))], collapse=","), "\\n")
+  }}
+}}
+'''
+            with tempfile.NamedTemporaryFile(suffix=".R", mode="w", delete=False) as f:
+                f.write(rscript); tmp = f.name
+            cmd = f"conda run -n {env['name']} Rscript {tmp}"
+        elif ext == ".h5ad":
+            env = find_existing_env(language="python") or find_existing_env(tool="scanpy")
+            if not env:
+                return {"error": "无 Python+Scanpy 环境, 先 /build-env scanpy", "path": p}
+            pyscript = f'''
+import scanpy as sc
+a = sc.read_h5ad("{p}")
+print("n_cells:", a.n_obs)
+print("n_genes:", a.n_vars)
+print("obs_cols:", list(a.obs.columns))
+print("gene_examples:", list(a.var_names[:5]))
+for c in a.obs.columns:
+    vals = a.obs[c].astype(str).unique()
+    if len(vals) <= 30:
+        print(f"{{c}}_vals:", list(vals[:8]))
+'''
+            with tempfile.NamedTemporaryFile(suffix=".py", mode="w", delete=False) as f:
+                f.write(pyscript); tmp = f.name
+            cmd = f"conda run -n {env['name']} python {tmp}"
+        else:
+            return {"error": f"不支持的格式: {ext}", "path": p}
+        r = self.dispatcher.run_shell(cmd, timeout=180)
+        try:
+            os.unlink(tmp)
+        except Exception:
+            pass
+        text = r.stdout
+        species_guess = _guess_species_from_genes(text)
+        return {"path": p, "format": ext, "env_used": env["name"],
+                "stdout": r.stdout[-1500:], "stderr": r.stderr[-500:],
+                "species_guess": species_guess, "success": r.success}
+
     def _download_data(self, accession, dest=None, file_type="processed", max_size_gb=5):
         """下载数据, 优先 processed; 超过 max_size_gb 返回确认提示不下载."""
         from .ncbi_client import geo_suppl_files, _human_size
@@ -308,3 +386,19 @@ def _geo_url(accession):
         return ""
     num = m.group(1)
     return f"https://ftp.ncbi.nlm.nih.gov/geo/series/{num[:-3]}nnn/{num}/suppl/"
+
+
+def _guess_species_from_genes(text: str) -> str:
+    """从基因名格式推断物种."""
+    t = text.lower()
+    if "at1g" in t or "at2g" in t or "at3g" in t or "at5g" in t:
+        return "Arabidopsis thaliana"
+    if "os01g" in t or "os02g" in t or "os03g" in t:
+        return "Oryza sativa"
+    if "zm00001" in t or "zea" in t or "zm00005" in t:
+        return "Zea mays"
+    if "solyc" in t:
+        return "Solanum lycopersicum"
+    if "glyma" in t:
+        return "Glycine max"
+    return "未知 (需检查基因名)"
