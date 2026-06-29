@@ -80,6 +80,22 @@ class ToolRegistry:
             self._inspect_data, max_result_chars=4000,
         ))
         self.register(ToolDef(
+            "find_genome_source",
+            "查物种的基因组/蛋白序列下载源 (Ensembl Plants/Phytozome/NCBI/物种专用库). 缺文件时给出下载链接.",
+            {"species": {"type": "string", "description": "物种名(拉丁学名或常用名), 如 'Wolffia australiana'/'玉米'", "required": True}},
+            self._find_genome_source, max_result_chars=3000,
+        ))
+        self.register(ToolDef(
+            "plan_task",
+            "缺文件时输出实施计划: 列出已有文件/缺失文件+获取方式/齐全后执行步骤. 缺文件时严禁强行执行, 必须先列计划告知用户.",
+            {"task": {"type": "string", "description": "任务描述, 如 '玉米+浮萍跨物种整合'", "required": True},
+             "have": {"type": "array", "description": "已有文件/信息列表", "required": False},
+             "missing": {"type": "array", "description": "缺失文件列表", "required": False},
+             "missing_sources": {"type": "array", "description": "缺失文件的获取方式/链接(对应missing)", "required": False},
+             "next_steps": {"type": "array", "description": "齐全后的执行步骤", "required": False}},
+            self._plan_task, max_result_chars=4000,
+        ))
+        self.register(ToolDef(
             "list_local_data",
             "列出本地可用的单细胞 h5ad 数据文件 (供跨物种分析等使用). 无参数.",
             {},
@@ -296,6 +312,32 @@ for c in a.obs.columns:
         return {"path": p, "format": ext, "env_used": env["name"],
                 "stdout": r.stdout[-1500:], "stderr": r.stderr[-500:],
                 "species_guess": species_guess, "success": r.success}
+
+    def _find_genome_source(self, species):
+        """查物种基因组/蛋白下载源."""
+        import json
+        from pathlib import Path
+        src_file = Path(__file__).parent / "data" / "genome_sources.json"
+        data = json.loads(src_file.read_text(encoding="utf-8"))
+        sp = species.lower()
+        hits = []
+        for s in data.get("sources", []):
+            if sp in s["species"].lower() or sp in s.get("common", "").lower() or \
+               any(w in s["species"].lower() for w in sp.split()):
+                hits.append({"species": s["species"], "common": s.get("common", ""),
+                             "sites": s["sites"]})
+        return {"query": species, "matched": hits,
+                "general_sources": data.get("general_sources", []),
+                "note": "缺基因组/蛋白序列时, 用这些链接下载. 蛋白序列用 pep.all.fa 或 protein.faa"}
+
+    def _plan_task(self, task, have=None, missing=None, missing_sources=None, next_steps=None):
+        """输出实施计划 (缺文件时不强行执行)."""
+        return {"task": task,
+                "have": have or [],
+                "missing": missing or [],
+                "missing_sources": missing_sources or [],
+                "next_steps": next_steps or [],
+                "instruction": "请提供缺失文件后继续. 缺失文件的获取方式见 missing_sources."}
 
     def _download_data(self, accession, dest=None, file_type="processed", max_size_gb=5):
         """下载数据, 优先 processed; 超过 max_size_gb 返回确认提示不下载."""

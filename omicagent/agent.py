@@ -49,6 +49,19 @@ search_data 返回每条的 data_type/total_size/has_processed/files/organs. 向
 5. **信息齐全后运行**: 数据(h5ad)+注释(celltype)+蛋白序列(跨物种用) 齐全后, 调 run_cross_species 或 run_module. rds 需先转 h5ad (SeuratDisk, 见 01_data_prep/scripts).
 不要在 rds 前反复纠结工具选择 — 先 inspect_data 探明格式与注释, 再按流程走.
 
+# 缺文件时严禁强行执行 (重要!)
+若检查后发现缺少必要文件(数据/基因组/蛋白序列/参考等), 且 AI 自己查找不到(检索无果/文献无来源)时:
+- **不要强行调用 run_cross_species / run_module 等执行工具** (会失败浪费时间)
+- **改为输出实施计划**: 列出还缺哪些文件 + 每个文件的获取方式(下载链接/基因组网站/数据库)
+- 常见基因组下载源(尽量给出):
+  • 拟南芥: https://www.arabidopsis.org/ (Araport11) / Ensembl Plants
+  • 水稻: RAP-DB (https://rapdb.dna.affrc.go.jp/) / Ensembl Plants Oryza_sativa
+  • 玉米: maizeGDB (https://www.maizegdb.org/) / Ensembl Plants Zea_mays
+  • 通用植物: Ensembl Plants (https://plants.ensembl.org/) / NCBI Datasets / Phytozome
+  • 蛋白序列: Ensembl Plants 的 pep.all.fa / NCBI Datasets protein.faa
+- 计划格式: ①已有(列文件) ②缺失(列文件+获取方式) ③齐全后的执行步骤
+- 等用户提供缺失文件后, 再继续执行.
+
 # 本地数据集目录优先 (scPlantDB 67个植物单细胞数据集, 含 h5ad+rds)
 检索植物单细胞数据时, search_data 会优先匹配本地 scPlantDB 目录(已知数据, 含 h5ad+rds 下载入口, 快).
 用户问"有哪些已知数据/本地数据集"时调 list_local_datasets (可按物种/组织过滤).
