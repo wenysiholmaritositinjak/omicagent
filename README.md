@@ -465,6 +465,53 @@ agent_framework/
 
 ---
 
+## 注释统一子项目 (annotation)
+
+把能力3 的一次性 LLM 映射升级为**持久化 + 可累积 + 可溯源**的版本化 mapping 表, 并以 skill 形式被 agent 调用; 产物喂给能力4 (`cross_species` 依赖统一标签列).
+
+### 架构
+
+```
+Zotero 文献源 (只读 zotero.sqlite + storage/)
+   │  zotero_source.py 按 collection/tag 筛植物单细胞文献 → zotero_index.json
+   ▼
+PDF 抽取  pdf_extractor.py (pymupdf) → 文本块 + 表格 + 注释段落
+   ▼
+采集语料  corpus.csv (annotation_harvester, P1) — 每行一个文献 raw_label + marker + 证据
+   ▼
+版本化 mapping 表  mapping_table.v{N}.json (mapping_store.py)
+   │  三级解析: ontology 同义词精确 → 表查表 → LLM 兜底(回写表, status=auto)
+   ▼
+map_to_standard (表优先) → celltype_standard → cross_species
+```
+
+### 数据契约 (`annotation/schemas.py`)
+
+- **CorpusRow** (corpus.csv): `paper_id / species / tissue / raw_label / marker_genes / source_type / evidence / confidence`
+- **MappingEntry** (mapping_table): 业务主键 `(raw_label, species, tissue)` 三元组 (避跨组织同词异义); 带 `method / confidence / status(confirmed|auto|review|rejected) / provenance`
+
+### 模块
+
+| 模块 | 作用 | 阶段 |
+|---|---|---|
+| `annotation/schemas.py` | corpus 行 + mapping 条目 dataclass + 校验 | ✅ P0 |
+| `annotation/zotero_source.py` | 只读 sqlite 筛植物单细胞文献 → zotero_index.json | ✅ P0 |
+| `annotation/pdf_extractor.py` | pymupdf 抽文本+表格+注释段落 | ✅ P0 |
+| `annotation/mapping_store.py` | 版本化表 CRUD/查询/diff | ✅ P0 |
+| `metadata_parser.map_to_standard` | 三级解析 (ontology→表→LLM回写), 表优先 | ✅ P0 |
+| `annotation/annotation_harvester.py` | 协调 条目→PDF→LLM 抽注释→写 corpus | P1 |
+| `skills/plant_annotation/SKILL.md` | skill playbook (注入 agent) | P3 |
+
+### v1 范围与方法
+
+- **范围**: 叶/根/茎 × 拟南芥/水稻
+- **方法**: 先表后模型 — v1 用 ontology 精确匹配 + LLM 兜底 + 持久化回写 (零新增重依赖); v2 再加 embedding 匹配器
+- **参考来源**: Zotero 文献注释 (不下载大数据集) + 地标图谱交叉校验
+- **基线**: 见 `data/annotation/baseline.md` (现版 plant_leaf: 叶 75% / 根 0% / 茎 29%)
+- **依赖**: `pymupdf` (PDF)、`pandas` (obs) 已装入 oa-venv; 不依赖 scanpy/torch (v1), embedding 留 v1.1
+
+---
+
 ## 引用
 
 如使用本项目，请引用：

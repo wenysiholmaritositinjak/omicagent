@@ -20,7 +20,11 @@ results/
 *.log
 
 # === 数据与模型大文件 (不入库) ===
-data/
+data/*
+# 放行注释统一子项目的小型可复现产物 (zotero_index.json 含本地路径, 仍忽略)
+!data/annotation/
+data/annotation/*
+!data/annotation/baseline.md
 *.h5ad
 *.h5
 *.rds

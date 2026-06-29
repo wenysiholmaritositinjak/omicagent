@@ -148,8 +148,20 @@ class MetadataParser:
     def map_to_standard(self, adata, col: str,
                         ontology: Optional[CellOntology] = None,
                         paper_text: str = "",
-                        confidence_threshold: float = 0.5) -> MappingResult:
-        """把 obs[col] 的非标准注释映射到标准体系."""
+                        confidence_threshold: float = 0.5,
+                        mapping_store=None,
+                        species: str = "",
+                        tissue: str = "") -> MappingResult:
+        """把 obs[col] 的非标准注释映射到标准体系.
+
+        三级解析 (表优先, LLM 兜底, 兜底结果回写表):
+        1) ontology 同义词精确归一 (最快, 免费, conf=1.0)
+        2) mapping_store 查表 (持久版本化表, 免费, 可复现) — 传 mapping_store 才启用
+        3) 未匹配送 LLM 结合文献+本体; LLM 结果回写 store (status=auto, 待人工 review)
+
+        mapping_store=None 时行为与原版完全一致 (不查表不回写), 保持向后兼容.
+        species/tissue 用于三元 key 查表与回写 (避免跨组织同词异义).
+        """
         import pandas as pd
         ont = ontology or load_ontology("plant_leaf")
         obs = adata.obs if hasattr(adata, "obs") else adata
@@ -157,18 +169,25 @@ class MetadataParser:
             raise ValueError(f"列不存在: {col}")
         labels = list(obs[col].astype(str).unique())
 
-        # 先用 ontology 同义词快速归一
         mapping, confidence = {}, {}
         unmatched = []
         for lab in labels:
+            # 1) ontology 同义词精确归一
             std = ont.normalize(lab)
             if std:
                 mapping[lab] = std
                 confidence[lab] = 1.0
-            else:
-                unmatched.append(lab)
+                continue
+            # 2) mapping_store 查表 (持久表, 免费, 可复现)
+            if mapping_store is not None:
+                ent = mapping_store.lookup(lab, species, tissue)
+                if ent is not None and ent.standard != "UNMAPPED":
+                    mapping[lab] = ent.standard
+                    confidence[lab] = ent.confidence
+                    continue
+            unmatched.append(lab)
 
-        # 未匹配的送 LLM 结合文献 + 本体映射
+        # 3) 未匹配的送 LLM 结合文献 + 本体映射, 结果回写 store
         if unmatched:
             llm_map = self._llm_map(unmatched, ont, paper_text)
             for lab, (std, conf) in llm_map.items():
@@ -176,6 +195,18 @@ class MetadataParser:
                 confidence[lab] = conf
                 if conf < confidence_threshold or std == "UNMAPPED":
                     pass  # 保留但标记低置信
+                # 回写 store (status=auto, 待人工 review); confirmed 不覆盖
+                if mapping_store is not None and std != "UNMAPPED":
+                    from datetime import datetime
+                    from .annotation.schemas import MappingEntry
+                    mapping_store.upsert(MappingEntry(
+                        raw_label=lab, species=species, tissue=tissue,
+                        standard=std, standard_ontology=ont.name,
+                        method="llm_proposal", confidence=conf,
+                        status="auto",
+                        evidence=(paper_text[:200] if paper_text else ""),
+                        mapped_at=datetime.now().isoformat(timespec="seconds"),
+                    ))
 
         # 覆盖率
         vals = obs[col].astype(str)

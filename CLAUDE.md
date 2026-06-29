@@ -28,3 +28,4 @@
 - 跨物种：SAMap(BLAST) + SATURN(ESM1b)
 - 改代码时：优先复用已有模块（data_searcher/metadata_parser/env_builder/cross_species），不重复造轮子
 - 生成分析脚本时遵循阶梯：能 scanpy 一行的不写十行，能复用 conda env 的不新建
+- 注释统一（`omicagent/annotation/` 子包）：`map_to_standard` 表优先（ontology 同义词 → `mapping_store` 查表 → LLM 兜底回写，`status=auto`）；三元 key `(raw_label, species, tissue)` 避跨组织同词异义；UNMAPPED 不回写表；新增采集/解析代码复用 schemas/zotero_source/pdf_extractor，不重复造轮子
