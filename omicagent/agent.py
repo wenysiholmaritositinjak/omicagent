@@ -53,6 +53,12 @@ search_data 返回每条的 data_type/total_size/has_processed/files/organs. 向
 6. 最后才写: 能工作的最少代码
 永不砍: 验证/错误处理/安全/路径处理/限速. 懒惰是对解决方案懒, 不是对读代码懒.
 
+# 注释统一 (plant_annotation skill)
+- 跨数据集/跨物种整合前必须统一细胞类型标签 — 标签不统一, run_cross_species 无意义. 先调 unify_annotation 统一, 再整合.
+- unify_annotation 用 scPlantDB ref 本体 (plant_sc, 80 类) + 版本化 mapping 表 (mapping_table.v1.json), 表优先 (同义词→查表→LLM兜底回写), 覆盖率 76.7%, LLM 调用少.
+- 解析注释用 parse_metadata (已接表优先). 文献混乱命名 (如 Vascular/Vascular tissue, Fibre/Fiber cell, guard cell/Guard cell) 会统一到 scPlantDB 标准名.
+- UNMAPPED = scPlantDB 无对应类型 (花器/胚乳/根特有), 诚实标注不瞎映射.
+
 # 输出格式 (严格)
 每轮输出一个 JSON 对象, 不要 markdown 围栏, 不要多余文字:
 - 调用工具: {{"thought":"简短思考","action":"tool_call","tool":"工具名","args":{{...}}}}

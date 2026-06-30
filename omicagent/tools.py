@@ -96,6 +96,14 @@ class ToolRegistry:
              "method": {"type": "string", "description": "samap 或 saturn, 默认 samap", "required": False}},
             self._run_cross_species, max_result_chars=4000,
         ))
+        self.register(ToolDef(
+            "unify_annotation",
+            "用 scPlantDB ref 本体 + 版本化 mapping 表统一细胞类型注释 (跨数据集/跨物种整合前置). 表优先: 同义词→mapping_table→LLM兜底. 返回映射表/覆盖率/统一后的标准类型数, 写回 celltype_standard 列.",
+            {"path": {"type": "string", "description": "h5ad 文件路径", "required": True},
+             "species": {"type": "string", "description": "物种 (rice/Arabidopsis), 辅助查表消歧", "required": False},
+             "tissue": {"type": "string", "description": "组织 (leaf/root/stem), 辅助查表消歧", "required": False}},
+            self._unify_annotation, max_result_chars=4000,
+        ))
 
     def register(self, tool: ToolDef):
         self.tools[tool.name] = tool
@@ -230,18 +238,63 @@ class ToolRegistry:
 
     def _parse_metadata(self, path):
         from .metadata_parser import MetadataParser
-        from .ontology import load_ontology
+        from .annotation.ref_ontology import load_scplantdb_ontology
+        from .annotation.mapping_store import MappingStore
+        from . import config
         mp = MetadataParser(self.llm)
         a = mp.load(path)
         ins = mp.inspect_columns(a)
         out = {"celltype_col": ins.celltype_col, "sample_col": ins.sample_col,
                "n_cells": a.n_obs, "n_genes": a.n_vars}
         if ins.celltype_col:
-            mr = mp.map_to_standard(a, ins.celltype_col, load_ontology("plant_leaf"))
+            ont = load_scplantdb_ontology()  # scPlantDB ref 本体 (80 类, 跨物种多组织)
+            store_path = config.PROJECT_ROOT / "data" / "annotation" / "mapping_table.v1.json"
+            store = MappingStore(str(store_path)) if store_path.exists() else None
+            mr = mp.map_to_standard(a, ins.celltype_col, ont, mapping_store=store)
             out["mapping"] = mr.mapping
             out["coverage"] = round(mr.coverage, 3)
             out["unmapped"] = mr.unmapped
+            out["ontology"] = "plant_sc (scPlantDB ref)"
+            out["mapping_store"] = "mapping_table.v1.json" if store else None
         return out
+
+    def _unify_annotation(self, path, species="", tissue=""):
+        """用 scPlantDB ref 本体 + 版本化 mapping 表统一细胞类型注释.
+
+        表优先 (免费可复现): ontology 同义词 → mapping_table 查表 → LLM 兜底回写.
+        适用于跨数据集/跨物种整合前统一标签 (cross_species 前置).
+        """
+        from .metadata_parser import MetadataParser
+        from .annotation.ref_ontology import load_scplantdb_ontology
+        from .annotation.mapping_store import MappingStore
+        from . import config
+        mp = MetadataParser(self.llm)
+        a = mp.load(path)
+        ins = mp.inspect_columns(a)
+        if not ins.celltype_col:
+            return {"error": f"未识别到细胞类型列, 可用列: {list(a.obs.columns)}"}
+        ont = load_scplantdb_ontology()
+        store_path = config.PROJECT_ROOT / "data" / "annotation" / "mapping_table.v1.json"
+        store = MappingStore(str(store_path)) if store_path.exists() else None
+        mr = mp.map_to_standard(a, ins.celltype_col, ont,
+                                mapping_store=store, species=species, tissue=tissue)
+        a = mp.apply_mapping(a, ins.celltype_col, mr)
+        # 写回统一注释
+        import os
+        out_dir = os.environ.get("OMICAGENT_RESULTS_DIR",
+                                 str(config.PROJECT_ROOT / "results"))
+        os.makedirs(out_dir, exist_ok=True)
+        out_h5ad = os.path.join(out_dir, os.path.basename(path).replace(".h5ad", "_unified.h5ad"))
+        try:
+            a.write_h5ad(out_h5ad)
+            written = out_h5ad
+        except Exception:
+            written = ""
+        return {"celltype_col": ins.celltype_col, "ontology": "plant_sc",
+                "mapping": mr.mapping, "coverage": round(mr.coverage, 3),
+                "unmapped": mr.unmapped, "n_standard_types": len(set(mr.mapping.values()) - {"UNMAPPED"}),
+                "standard_col": "celltype_standard", "out_h5ad": written,
+                "note": "表优先: 同义词→mapping_table→LLM兜底. 跨物种整合前用此统一标签"}
 
     def _build_env(self, metadata, goal=""):
         from .env_builder import EnvBuilder
