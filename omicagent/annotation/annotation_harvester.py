@@ -105,9 +105,14 @@ class AnnotationHarvester:
         if not pdf_path or not os.path.exists(pdf_path):
             log.warning("PDF 不存在: %s", pdf_path)
             return []
-        pt = extract_text(pdf_path)
-        secs = _select_sections(pt, self.max_input_chars)
-        tables = _select_tables(extract_tables(pdf_path, max_pages=25))
+        try:
+            pt = extract_text(pdf_path)
+            secs = _select_sections(pt, self.max_input_chars)
+            tables = _select_tables(extract_tables(pdf_path, max_pages=25))
+        except Exception as e:
+            # pymupdf 偶发崩溃 (扫描版/加密/大文件), 单篇失败不拖垮整批
+            log.warning("PDF 抽取失败 %s: %s", paper.get("title", "")[:30], e)
+            return []
         if not secs and not tables:
             log.info("无注释内容: %s", paper.get("title", "")[:40])
             return []
