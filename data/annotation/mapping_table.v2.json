@@ -1,0 +1,5454 @@
+{
+  "version": "v2",
+  "created_at": "2026-06-30T23:24:56",
+  "ontologies": [
+    "plant_sc"
+  ],
+  "note": "P2v2: 多物种 corpus + 两级映射 (standard粗+subtype细). SAMap用standard, SATURN用subtype.",
+  "entries": [
+    {
+      "raw_label": "Mesophyll",
+      "species": "Arabidopsis,rice",
+      "tissue": "leaf",
+      "standard": "Mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "106",
+        "185",
+        "1931",
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Guard cell",
+      "species": "Arabidopsis,rice",
+      "tissue": "leaf",
+      "standard": "Guard cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931",
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermis",
+      "species": "Arabidopsis,rice",
+      "tissue": "leaf",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "106",
+        "1898",
+        "1931",
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Shoot apical meristem",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Cortex",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Cortex",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Sclerenchyma",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Sclerenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Endodermis",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Endodermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Procambium",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Procambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "1931"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "bundle sheath",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Bundle sheath",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "1504"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "guard cell",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Guard cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "20"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endodermis",
+      "species": "Arabidopsis,maize,rice",
+      "tissue": "root",
+      "standard": "Endodermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "174",
+        "213",
+        "287",
+        "317",
+        "322",
+        "9"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cortex",
+      "species": "Arabidopsis,maize,rice,tomato",
+      "tissue": "root",
+      "standard": "Cortex",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "213",
+        "287",
+        "291",
+        "317",
+        "394",
+        "496",
+        "58",
+        "9"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem",
+      "species": "Arabidopsis,maize,rice,tomato",
+      "tissue": "root",
+      "standard": "Phloem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "10",
+        "291",
+        "317",
+        "394",
+        "398",
+        "58"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "xylem",
+      "species": "Arabidopsis,maize,rice,tomato",
+      "tissue": "root",
+      "standard": "Xylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "10",
+        "317",
+        "389",
+        "394",
+        "58"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Phloem parenchyma",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Phloem parenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Companion cell",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Companion cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Procambium",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Procambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Protophloem",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Protophloem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Xylem",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Xylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Bundle sheath",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Bundle sheath",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis",
+      "species": "Arabidopsis,maize,rice",
+      "tissue": "root",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "287",
+        "288",
+        "317",
+        "389",
+        "394",
+        "9"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "metaxylem",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Metaxylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "287"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pericycle",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Pericycle",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "291",
+        "322",
+        "398"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "mesophyll",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "15",
+        "496"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "guard",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Guard cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "companion",
+      "species": "Arabidopsis",
+      "tissue": "other",
+      "standard": "Companion cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "sclerenchyma",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Sclerenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "387",
+        "394"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermis",
+      "species": "rice,tomato",
+      "tissue": "other",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "36"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Procambium",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Procambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "234"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cortex",
+      "species": ",maize",
+      "tissue": "stem",
+      "standard": "Cortex",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "274",
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem",
+      "species": ",maize",
+      "tissue": "stem",
+      "standard": "Phloem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "274",
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "xylem",
+      "species": ",maize",
+      "tissue": "stem",
+      "standard": "Xylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "274",
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "procambium",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Procambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "protoxylem",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Protoxylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis",
+      "species": "maize",
+      "tissue": "leaf",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "abaxial epidermis",
+      "species": "maize",
+      "tissue": "leaf",
+      "standard": "Abaxial epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Vascular tissue",
+      "species": "tomato",
+      "tissue": "other",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "xylem",
+      "species": "soybean,tomato",
+      "tissue": "other",
+      "standard": "Xylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "36",
+        "38"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "spikelet meristem",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Spikelet meristem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Meristem base",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristem base",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Adaxial meristem periphery",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Adaxial meristem periphery",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "bundle sheath",
+      "species": "maize",
+      "tissue": "stem",
+      "standard": "Bundle sheath",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endodermis",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Endodermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis",
+      "species": "Arabidopsis,soybean",
+      "tissue": "other",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "38",
+        "496"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Phloem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "companion cell",
+      "species": "Arabidopsis",
+      "tissue": "other",
+      "standard": "Companion cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "guard cell",
+      "species": "Arabidopsis",
+      "tissue": "other",
+      "standard": "Guard cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "trichome",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Trichome",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "synonym_exact",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "plant_sc 同义词精确匹配",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Vascular",
+      "species": "rice",
+      "tissue": "leaf",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Collenchyma",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "UNMAPPED",
+      "subtype": "collenchyma",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Bud axis",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Shoot axis apex",
+      "subtype": "bud-axis",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Bud primordium",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Initial cell",
+      "subtype": "bud-primordium",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Parenchyma cell",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Parenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Meristem",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Fibre",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Fiber cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Exodermis",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Outer cortex",
+      "subtype": "exodermis",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.75,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermis near root hair",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "near-root-hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Root cap",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "root-cap",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Proliferating cell",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "proliferating",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Filament",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "filament",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Lodicule",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "lodicule",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Ovary wall",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovary-wall",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Ovule",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovule",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Pollen mother cell",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Stigma",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Tapetum",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "Secretory tissue",
+      "subtype": "tapetum",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Plumule",
+      "species": "rice",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Scutellum",
+      "species": "rice",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "185",
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Leaf primordia apex",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "1931"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Bulliform cells",
+      "species": "rice",
+      "tissue": "leaf",
+      "standard": "Leaf epidermis",
+      "subtype": "bulliform",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "1898",
+        "233"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Endosperm",
+      "species": "rice",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "1898",
+        "233"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Procambial meristem",
+      "species": "rice",
+      "tissue": "meristem",
+      "standard": "Procambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "1898",
+        "233"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Developing xylem",
+      "species": "rice",
+      "tissue": "other",
+      "standard": "Xylem precursor cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "1898",
+        "233"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "parenchyma cells",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Parenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "1494"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "EVB xylem cells",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Xylem",
+      "subtype": "EVB",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "1494"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "DVB/TVB xylem cells",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Xylem",
+      "subtype": "DVB/TVB",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "1494"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem cells",
+      "species": "rice",
+      "tissue": "stem",
+      "standard": "Phloem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "1494"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermal cells",
+      "species": ",Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "20",
+        "45",
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "mesophyll cells",
+      "species": ",Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "20",
+        "271",
+        "45",
+        "498"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular cells",
+      "species": ",Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "20",
+        "45",
+        "498"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "hydathodes cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "20"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem cell",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "20"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "xylem cell",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "20"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "sieve elements",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "20"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Vasculature",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "106"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "PCCs",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "106"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "immune-active mesophyll cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "106"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "protophloem cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "147"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "sieve element",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "147"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "WOX5+ (WOX5-positive) cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "QC cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174",
+        "291"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem/pericycle",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "CRC",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: ",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "root hair",
+      "species": ",Arabidopsis,rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "16",
+        "174",
+        "287"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "LRC",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174",
+        "389"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermal (Epi)",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermal/lateral root cap initials",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stem cells for the epidermis and lateral root cap",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "174"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermal cells",
+      "species": "rice",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "233"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermal layer",
+      "species": "rice",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "233"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "10",
+        "322"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristematic cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "10",
+        "291"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endodermis cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "10"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cortical cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "10",
+        "322"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "root cap cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "10",
+        "15"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "mature phloem",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "procambium/xylem",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristemoids",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\": \"root hair\", \"tissue\": \"root\", \"standard\": \"Root ep",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stomatal lineage ground cells (SLGCs)",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf epidermis",
+      "subtype": "stomatal-lineage-ground",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "guard mother cells (GMCs)",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Guard cell",
+      "subtype": "mother-cell",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "guard cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Guard cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "271",
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pavement cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf pavement cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "young epidermal cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf epidermis",
+      "subtype": "young",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "271"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Spongy parenchyma",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Spongy mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Hydathodes cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Secretory tissue",
+      "subtype": "hydathode",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "28"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stamen residue",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "stamen-residue",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stigma",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "stigma",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "ovary wall",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovary-wall",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "outer surface of the ovary wall",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovary-wall-outer-surface",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "style",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "style",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "basal style",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "basal-style",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "inner surface of the ovary wall",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovary-wall-inner-surface",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "outer integument",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "outer-integument",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "ovule",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovule",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "carpel-originated cells",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "carpel-originated",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "ovule-originated cells",
+      "species": "rice",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "ovule-originated",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "3"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis near root hair",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "near-root-hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "287"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "root cap",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "root-cap",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "287"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele",
+      "species": "Arabidopsis,maize,rice,tomato",
+      "tissue": "root",
+      "standard": "Root stele",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "287",
+        "291",
+        "317",
+        "58"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stem cells",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Stem cell niche",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "287"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "ground tissues",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Ground tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "288"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "c/e pre",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "cortex-endodermis-pre",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endo 1",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root endodermis",
+      "subtype": "1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endo 2",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root endodermis",
+      "subtype": "2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endo 3",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root endodermis",
+      "subtype": "3",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele 1 (xylem)",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Xylem",
+      "subtype": "1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele (phloem)",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Phloem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele 2 (peri)",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Pericycle",
+      "subtype": "2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "hair",
+      "species": "Arabidopsis,tomato",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "58",
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "non-hair",
+      "species": "Arabidopsis,tomato",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "non-hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "58",
+        "9"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endodermal cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root endodermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "291"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "trichoblast",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "trichoblast",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "291",
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "atrichoblast",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "atrichoblast",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "291",
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "maturing xylem cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Xylem",
+      "subtype": "maturing",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "291"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "columella",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "columella",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "291",
+        "322",
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "lateral root cap cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "lateral-root-cap",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "291",
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "differentiating trichoblasts",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "differentiating-trichoblast",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "291"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristematic cortex",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root cortex",
+      "subtype": "meristematic",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "291"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristematic endodermis",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root endodermis",
+      "subtype": "meristematic",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "291"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristematic vasculature",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Vascular tissue",
+      "subtype": "meristematic",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "291"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "shoot meristem",
+      "species": "Arabidopsis",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermal",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cortical",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root cortex",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "proliferating",
+      "species": "Arabidopsis",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "proliferating",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular",
+      "species": "Arabidopsis",
+      "tissue": "other",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular precursor cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Provascular",
+      "subtype": "precursor",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristemoid mother cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Meristematic cell",
+      "subtype": "mother-cell",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "guard mother cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Guard cell",
+      "subtype": "mother-cell",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pavement",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf pavement cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "early protodermal cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Epidermis",
+      "subtype": "early-protodermal",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "15"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "upper epidermal cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Adaxial epidermis",
+      "subtype": "upper",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "15",
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "lower epidermal cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Abaxial epidermis",
+      "subtype": "lower",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "15",
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "INIT.epidermis",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "epidermis-initial",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "INIT.cortex",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "cortex-initial",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "INIT.endodermis",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "endodermis-initial",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "INIT.stele",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "stele-initial",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "INIT.root cap",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "root-cap-initial",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "INIT.Pr",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "Pr-initial",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "QC",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Stem cell niche",
+      "subtype": "QC",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "389"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "XPP",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Xylem pole pericycle",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "389",
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "CR primordia",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "CR-primordia",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "parenchyma_2",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Parenchyma",
+      "subtype": "2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "transition_tissue_1",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "transition_tissue_2",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "transition_tissue_3",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "3",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "peripheral_primordia",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "peripheral-primordia",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "parenchyma_1",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Parenchyma",
+      "subtype": "1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pericycle_like",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Pericycle",
+      "subtype": "like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "transitional_cortex",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Root cortex",
+      "subtype": "transitional",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristem_1",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Meristematic cell",
+      "subtype": "1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele_1",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Root stele",
+      "subtype": "1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele_2",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Root stele",
+      "subtype": "2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stele_3",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "Root stele",
+      "subtype": "3",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis_exodermis_sclerenchyma",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "exodermis",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "387",
+        "394"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristem",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "394"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermal cells",
+      "species": "Arabidopsis,rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "322",
+        "387"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Atrichoblast",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "387"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Trichoblast",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "387"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "mature root cells",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "387"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem cells",
+      "species": "Arabidopsis,rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "322",
+        "387"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "root hair cells",
+      "species": "rice",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "387"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stomata",
+      "species": "",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "1955"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "primordium",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "1955",
+        "48"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "boundary region",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "1955",
+        "48"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "inflorescence meristems",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "1955"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pathogen-targeted cells (PTCs)",
+      "species": "",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "45"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cells surrounding PTCs (SPCs)",
+      "species": "",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.0,
+      "status": "review",
+      "paper_ids": [
+        "45"
+      ],
+      "evidence": "LLM 失败: 无法解析 JSON: [\n  {\"raw_label\":\"epidermis_exodermis_sclerenchyma\",\"tissue\":\"root\",\"",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "stomata",
+      "species": "",
+      "tissue": "other",
+      "standard": "Guard cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "48"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "indeterminate inflorescence meristems",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Inflorescence meristem",
+      "subtype": "indeterminate",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "48"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "primary root hair cells",
+      "species": "",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "primary-root-hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "16"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cortex/stele",
+      "species": "",
+      "tissue": "root",
+      "standard": "Root cortex",
+      "subtype": "stele",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "16"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermis-like cells",
+      "species": "Arabidopsis",
+      "tissue": "stem",
+      "standard": "Epidermis",
+      "subtype": "like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Lateral-root-cap-like cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Outer cell layer",
+      "subtype": "lateral-root-cap-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "QC-like cells",
+      "species": "Arabidopsis",
+      "tissue": "meristem",
+      "standard": "Stem cell niche",
+      "subtype": "QC-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Vascular-initial-like cells",
+      "species": "Arabidopsis",
+      "tissue": "stem",
+      "standard": "Initial cell",
+      "subtype": "vascular-initial-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Vascular cells",
+      "species": "Arabidopsis",
+      "tissue": "stem",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Callus founder cells",
+      "species": "Arabidopsis",
+      "tissue": "stem",
+      "standard": "Explant vasculature and callus founder cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Dividing cells",
+      "species": "Arabidopsis",
+      "tissue": "stem",
+      "standard": "Meristematic cell",
+      "subtype": "dividing",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "29"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Vascular",
+      "species": "rice",
+      "tissue": "other",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Parenchyma cell",
+      "species": "rice",
+      "tissue": "other",
+      "standard": "Parenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "185"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Proliferating cell",
+      "species": "rice",
+      "tissue": "other",
+      "standard": "Meristematic cell",
+      "subtype": "proliferating",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "185"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "central zone cells",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "central-zone",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "234"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "suppressed bract or glume primordia",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "suppressed-bract-or-glume-primordia",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "234"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "base of the axillary meristem",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Branch meristem",
+      "subtype": "base",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "234"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "QC",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Stem cell niche",
+      "subtype": "quiescent-center",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "236"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "procambial",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Procambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "236"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "PCC",
+      "species": "maize",
+      "tissue": "other",
+      "standard": "Companion cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "236"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "PP/PSEP",
+      "species": "maize",
+      "tissue": "other",
+      "standard": "Phloem",
+      "subtype": "PP/PSEP",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "236"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cold zone",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "cold-zone",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "early-stage sheath",
+      "species": "",
+      "tissue": "stem",
+      "standard": "Bundle sheath",
+      "subtype": "early-stage",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "ground meristem",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Ground tissue",
+      "subtype": "meristem",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "intercalary meristem",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "intercalary",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "KN1+",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "KN1-positive",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "late-stage sheath",
+      "species": "",
+      "tissue": "stem",
+      "standard": "Bundle sheath",
+      "subtype": "late-stage",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "middle-stage sheath",
+      "species": "",
+      "tissue": "stem",
+      "standard": "Bundle sheath",
+      "subtype": "middle-stage",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Procambium enriched domain",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Procambium",
+      "subtype": "enriched-domain",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pith",
+      "species": ",maize",
+      "tissue": "stem",
+      "standard": "Parenchyma",
+      "subtype": "pith",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "274",
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular",
+      "species": "",
+      "tissue": "stem",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular meristem",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Procambium",
+      "subtype": "vascular-meristem",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "IDD7+",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "UNMAPPED",
+      "subtype": "IDD7+",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "apical meristem",
+      "species": "",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "apical",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "sheath",
+      "species": "",
+      "tissue": "stem",
+      "standard": "Bundle sheath",
+      "subtype": "sheath",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "274"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "non-hair cell epidermis",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "non-hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "mature xylem cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Xylem",
+      "subtype": "mature",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "phloem-like",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Phloem",
+      "subtype": "phloem-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristematic xylem",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Xylem precursor cell",
+      "subtype": "meristematic",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "hair cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "hair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "quiescent center cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Stem cell niche",
+      "subtype": "quiescent-center",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "322"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "lateral root cap (LRC)",
+      "species": "maize",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "lateral-root-cap",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "317"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Mesophyll cells",
+      "species": "maize",
+      "tissue": "leaf",
+      "standard": "Mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "L1 layer",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristem epidermis",
+      "subtype": "L1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "abaxial subepidermal cells",
+      "species": "maize",
+      "tissue": "leaf",
+      "standard": "Inner cell layer",
+      "subtype": "abaxial-subepidermal",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular cells",
+      "species": "maize",
+      "tissue": "other",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Determinate leaf epidermal cells",
+      "species": "maize",
+      "tissue": "leaf",
+      "standard": "Leaf epidermis",
+      "subtype": "determinate",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "actively dividing cells",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "actively-dividing",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "indeterminate cells",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "indeterminate",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "determinate cells",
+      "species": "maize",
+      "tissue": "leaf",
+      "standard": "UNMAPPED",
+      "subtype": "determinate",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.3,
+      "status": "review",
+      "paper_ids": [
+        "19"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Shoot primordia",
+      "species": "tomato",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "primordia",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Inner callus",
+      "species": "tomato",
+      "tissue": "other",
+      "standard": "UNMAPPED",
+      "subtype": "inner",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.2,
+      "status": "review",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Outgrowth shoot",
+      "species": "tomato",
+      "tissue": "stem",
+      "standard": "Shoot axis apex",
+      "subtype": "outgrowth",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "chlorenchyma cells",
+      "species": "tomato",
+      "tissue": "other",
+      "standard": "Photosynthetic cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "mesophyll cell",
+      "species": "tomato",
+      "tissue": "other",
+      "standard": "Mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermis-like 1",
+      "species": "tomato",
+      "tissue": "other",
+      "standard": "Epidermis",
+      "subtype": "like-1",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Epidermis-like 2",
+      "species": "tomato",
+      "tissue": "other",
+      "standard": "Epidermis",
+      "subtype": "like-2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "36"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "IM tip (IMT)",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Inflorescence meristem",
+      "subtype": "tip",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "IM periphery (IMP)",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Inflorescence meristem",
+      "subtype": "periphery",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "IM",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Inflorescence meristem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristem epidermis (ME)",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristem epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vasculature",
+      "species": "maize",
+      "tissue": "stem",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "meristem internal",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Meristematic cell",
+      "subtype": "internal",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "floral meristem",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Flower meristem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "Determinate lateral organs",
+      "species": "maize",
+      "tissue": "other",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.1,
+      "status": "review",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "spikelet pair meristems (SPM)",
+      "species": "maize",
+      "tissue": "meristem",
+      "standard": "Spikelet meristem",
+      "subtype": "pair",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "396"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "QC-like cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Stem cell niche",
+      "subtype": "QC-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular-like cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Vascular tissue",
+      "subtype": "vascular-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "LRPI-like cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "LRPI-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "response cell",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.1,
+      "status": "review",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "columella-like",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "UNMAPPED",
+      "subtype": "columella-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.2,
+      "status": "review",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "VI-like cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "VI-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermis-like",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root epidermis",
+      "subtype": "epidermis-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "regenerative cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Meristematic cell",
+      "subtype": "regenerative",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.5,
+      "status": "review",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "RPI-like cells",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Initial cell",
+      "subtype": "RPI-like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "397"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "upper epidermis",
+      "species": "",
+      "tissue": "leaf",
+      "standard": "Adaxial epidermis",
+      "subtype": "upper",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "34"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "lower epidermis",
+      "species": "",
+      "tissue": "leaf",
+      "standard": "Abaxial epidermis",
+      "subtype": "lower",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "34"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "spongy mesophyll cells",
+      "species": ",Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Spongy mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.98,
+      "status": "confirmed",
+      "paper_ids": [
+        "34",
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "palisade mesophyll cells",
+      "species": ",Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Palisade mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.98,
+      "status": "confirmed",
+      "paper_ids": [
+        "34",
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "spikelet primordium-1/2",
+      "species": "",
+      "tissue": "flower",
+      "standard": "Spikelet meristem",
+      "subtype": "primordium-1/2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "spikelet primordium base",
+      "species": "",
+      "tissue": "flower",
+      "standard": "Spikelet meristem",
+      "subtype": "primordium-base",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "basal zone",
+      "species": "",
+      "tissue": "flower",
+      "standard": "Meristem base",
+      "subtype": "basal-zone",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "lower rachis",
+      "species": "",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "lower-rachis",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.3,
+      "status": "review",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "upper rachis",
+      "species": "",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "upper-rachis",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.3,
+      "status": "review",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "leaf and bract primordium",
+      "species": "",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "leaf-and-bract-primordium",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.3,
+      "status": "review",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "lateral organ primordium-1/2",
+      "species": "",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "lateral-organ-primordium-1/2",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.3,
+      "status": "review",
+      "paper_ids": [
+        "416"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "infected cells",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Infected cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.99,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endosperm",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.1,
+      "status": "review",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "embryo",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.1,
+      "status": "review",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "seed coat endothelium",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "seed-coat-endothelium",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.1,
+      "status": "review",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "seed coat inner integument",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "inner-integument",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "endoderm",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "Endodermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "micropylar endosperm",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "micropylar",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "peripheral endosperm",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "peripheral",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "chalazal endosperm",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "UNMAPPED",
+      "subtype": "chalazal",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "axis parenchyma",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "Parenchyma",
+      "subtype": "axis",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "cotyledon parenchyma",
+      "species": "soybean",
+      "tissue": "seed",
+      "standard": "Parenchyma",
+      "subtype": "cotyledon",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "41"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pith",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Parenchyma",
+      "subtype": "pith",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "SAM",
+      "species": "soybean",
+      "tissue": "meristem",
+      "standard": "Shoot apical meristem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 1.0,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "PC",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Parenchyma",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "VC",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Vascular cambium",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular parenchyma",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Parenchyma",
+      "subtype": "vascular",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "MC",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Mesophyll",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.8,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "xylem cell",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Xylem",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "EC",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Epidermis",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.7,
+      "status": "review",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "CC-like cells",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Companion cell",
+      "subtype": "like",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "CCs",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Companion cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "SECBs",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Phloem",
+      "subtype": "SECB",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.6,
+      "status": "review",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "SEs",
+      "species": "soybean",
+      "tissue": "other",
+      "standard": "Phloem",
+      "subtype": "sieve-element",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "38"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "vascular cell",
+      "species": "Arabidopsis",
+      "tissue": "other",
+      "standard": "Vascular tissue",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "suberized endodermis",
+      "species": "Arabidopsis",
+      "tissue": "root",
+      "standard": "Root endodermis",
+      "subtype": "suberized",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pith cell",
+      "species": "Arabidopsis",
+      "tissue": "stem",
+      "standard": "Parenchyma",
+      "subtype": "pith",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.85,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "sperm",
+      "species": "Arabidopsis",
+      "tissue": "flower",
+      "standard": "Sperm nuclei",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.9,
+      "status": "confirmed",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "pollen",
+      "species": "Arabidopsis",
+      "tissue": "flower",
+      "standard": "UNMAPPED",
+      "subtype": "pollen",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.3,
+      "status": "review",
+      "paper_ids": [
+        "496"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    },
+    {
+      "raw_label": "epidermal pavement cells",
+      "species": "Arabidopsis",
+      "tissue": "leaf",
+      "standard": "Leaf pavement cell",
+      "subtype": "",
+      "standard_ontology": "plant_sc",
+      "method": "llm_proposal",
+      "confidence": 0.95,
+      "status": "confirmed",
+      "paper_ids": [
+        "498"
+      ],
+      "evidence": "LLM 两级映射 (scPlantDB 术语池)",
+      "reviewer": "",
+      "mapped_at": "2026-06-30T23:24:56"
+    }
+  ]
+}
