@@ -74,7 +74,8 @@ class MappingEntry:
     raw_label: str
     species: str
     tissue: str
-    standard: str                       # 映射到的标准术语; 确无对应填 "UNMAPPED"
+    standard: str                       # 粗粒度标准术语 (跨物种对齐, SAMap用); 确无对应填 "UNMAPPED"
+    subtype: str = ""                   # 细粒度亚群 (保留分群信息, SATURN用); 如 "cortex-initial" / "A" / "mother-cell"
     standard_ontology: str = ""         # plant_leaf / plant_root / plant_stem
     method: str = "llm_proposal"        # synonym_exact / ontology_normalize / llm_proposal / manual / embedding_topk
     confidence: float = 0.0             # 0.0-1.0
