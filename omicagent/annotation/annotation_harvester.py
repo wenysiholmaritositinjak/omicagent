@@ -175,17 +175,31 @@ class AnnotationHarvester:
         return list(seen.values())
 
     def harvest_batch(self, papers: list[dict], out_csv: str,
-                      max_papers: int = 0) -> list[CorpusRow]:
-        """批量采集, 写 corpus.csv."""
-        all_rows: list[CorpusRow] = []
+                      max_papers: int = 0, resume: bool = True) -> list[CorpusRow]:
+        """批量采集, 增量写 corpus.csv (每篇完成即写盘, 支持断点续跑).
+
+        resume=True: 跳过 out_csv 中已有 paper_id 的篇目 (按标题去重), 适合 WSL 崩溃后续跑.
+        """
+        done_ids: set[str] = set()
+        existing: list[CorpusRow] = []
+        if resume and os.path.exists(out_csv):
+            existing = self._read_csv(out_csv)
+            done_ids = {r.paper_id for r in existing}
+            log.info("续跑: 已完成 %d 篇 (%d 行), 跳过", len(done_ids), len(existing))
+        out_rows = list(existing)
         n = len(papers) if max_papers <= 0 else min(max_papers, len(papers))
         for i, p in enumerate(papers[:n], 1):
+            pid = p.get("item_id", "")
+            if pid and pid in done_ids:
+                continue
             log.info("[%d/%d] %s", i, n, p.get("title", "")[:40])
             rows = self.harvest_paper(p)
-            all_rows.extend(rows)
-        self._write_csv(all_rows, out_csv)
-        log.info("完成: %d 篇 -> %d 行 -> %s", n, len(all_rows), out_csv)
-        return all_rows
+            if rows:
+                out_rows.extend(rows)
+                self._write_csv(out_rows, out_csv)  # 每篇完成即写盘 (增量)
+                log.info("已写 %d 行 -> %s", len(out_rows), out_csv)
+        log.info("完成: %d 行 -> %s", len(out_rows), out_csv)
+        return out_rows
 
     @staticmethod
     def _write_csv(rows, out_csv):
@@ -195,3 +209,16 @@ class AnnotationHarvester:
             w.writerow(CorpusRow.csv_header())
             for r in rows:
                 w.writerow(r.to_csv_row())
+
+    @staticmethod
+    def _read_csv(out_csv) -> list[CorpusRow]:
+        """读已有 corpus.csv (续跑用)."""
+        import csv as _csv
+        rows: list[CorpusRow] = []
+        if not os.path.exists(out_csv):
+            return rows
+        with open(out_csv, encoding="utf-8", newline="") as f:
+            r = _csv.DictReader(f)
+            for d in r:
+                rows.append(CorpusRow(**{k: d.get(k, "") for k in CorpusRow.csv_header()}))
+        return rows
