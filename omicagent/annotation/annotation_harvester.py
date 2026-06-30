@@ -156,13 +156,20 @@ class AnnotationHarvester:
                 if mk and not seen[raw].marker_genes:
                     seen[raw].marker_genes = mk
                 continue
+            # species/tissue: 优先 LLM 单值, 否则 guess 取首值 (去笛卡尔积串污染)
+            sp = (it.get("species") or "").strip()
+            if not sp:
+                sp = (paper.get("species_guess") or "").split(",")[0].strip()
+            ti = (it.get("tissue") or "").strip()
+            if not ti:
+                ti = (paper.get("tissue_guess") or "").split(",")[0].strip()
             seen[raw] = CorpusRow(
                 paper_id=paper.get("item_id", ""),
                 paper_title=paper.get("title", "")[:60],
                 doi=paper.get("doi", ""),
                 pmid="",
-                species=(it.get("species") or paper.get("species_guess") or ""),
-                tissue=(it.get("tissue") or paper.get("tissue_guess") or ""),
+                species=sp,
+                tissue=ti,
                 raw_label=raw,
                 raw_label_zh=it.get("raw_label_zh", "") or "",
                 marker_genes=mk,
