@@ -29,6 +29,7 @@ data/annotation/*
 !data/annotation/corpus.csv
 !data/annotation/p1_harvest_report.md
 !data/annotation/mapping_table.v1.json
+!data/annotation/p2_mapping_report.md
 *.h5ad
 *.h5
 *.rds
