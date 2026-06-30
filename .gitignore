@@ -28,6 +28,7 @@ data/annotation/*
 !data/annotation/scplantdb_ref.json
 !data/annotation/corpus.csv
 !data/annotation/p1_harvest_report.md
+!data/annotation/mapping_table.v1.json
 *.h5ad
 *.h5
 *.rds
