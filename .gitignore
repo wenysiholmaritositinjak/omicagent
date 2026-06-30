@@ -26,6 +26,7 @@ data/*
 data/annotation/*
 !data/annotation/baseline.md
 !data/annotation/scplantdb_ref.json
+!data/annotation/corpus.csv
 *.h5ad
 *.h5
 *.rds
