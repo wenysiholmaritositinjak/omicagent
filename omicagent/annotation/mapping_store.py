@@ -35,15 +35,34 @@ class MappingStore:
         self._dirty = False
 
     def lookup(self, raw_label: str, species: str, tissue: str) -> Optional[MappingEntry]:
-        """按 (raw_label, species, tissue) 三元 key 查表. tissue 为空时尝试组织无关回退."""
+        """按 (raw_label, species, tissue) 三元 key 查表.
+
+        精确三元未命中时, 逐级回退 (raw_label 唯一即可命中, 不强求 species/tissue):
+        1) 同 raw_label + species, 任意 tissue (confirmed 优先)
+        2) 同 raw_label, 任意 species/tissue (confirmed 优先, 否则最高置信)
+        """
         e = self._index.get((raw_label, species, tissue))
-        if e is None and tissue:
-            # 组织无关回退: 同 raw_label+species 任意 tissue 的 confirmed 条目
-            for ent in self.table.entries:
-                if (ent.raw_label == raw_label and ent.species == species
-                        and ent.status == "confirmed"):
-                    return ent
-        return e
+        if e is not None:
+            return e
+        cands = [ent for ent in self.table.entries
+                 if ent.raw_label == raw_label and ent.status != "rejected"]
+        if not cands:
+            return None
+        # 优先 species 匹配
+        if species:
+            sp_cands = [c for c in cands if species in (c.species or "")]
+            if sp_cands:
+                cands = sp_cands
+        # 优先 tissue 匹配
+        if tissue:
+            ti_cands = [c for c in cands if c.tissue == tissue]
+            if ti_cands:
+                cands = ti_cands
+        # confirmed 优先, 否则最高置信
+        confirmed = [c for c in cands if c.status == "confirmed"]
+        if confirmed:
+            return confirmed[0]
+        return max(cands, key=lambda c: c.confidence)
 
     def upsert(self, entry: MappingEntry, overwrite_confirmed: bool = False) -> bool:
         """新增或更新. 同 key 已为 confirmed 时默认不覆盖. 返回是否实际写入."""
