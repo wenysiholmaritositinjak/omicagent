@@ -269,6 +269,8 @@ class ToolRegistry:
         from .annotation.mapping_store import MappingStore
         from . import config
         mp = MetadataParser(self.llm)
+        if str(path).lower().endswith((".rds", ".rdata")):
+            return {"error": ".rds 需先用 R 导出为 h5ad 或 obs.csv (见 skills/plant_annotation/SKILL.md 'rds 转换' 节). Python 端 unify_annotation 接收 h5ad/csv."}
         a = mp.load(path)
         ins = mp.inspect_columns(a)
         if not ins.celltype_col:
@@ -279,12 +281,21 @@ class ToolRegistry:
         mr = mp.map_to_standard(a, ins.celltype_col, ont,
                                 mapping_store=store, species=species, tissue=tissue)
         a = mp.apply_mapping(a, ins.celltype_col, mr)
+        # 写回 celltype_subtype 列 (从 mapping_store 查, 保留亚群/特异群信息, SATURN 用)
+        if store:
+            sub_map = {}
+            for lab in a.obs[ins.celltype_col].astype(str).unique():
+                e = store.lookup(lab, species or "", tissue or "")
+                sub_map[lab] = (e.subtype if e else "") or ("unmapped:" + str(lab).lower().replace(" ", "-")) if (mr.mapping.get(lab) == "UNMAPPED") else (e.subtype if e else "")
+                if not sub_map[lab]:
+                    sub_map[lab] = ""
+            a.obs["celltype_subtype"] = a.obs[ins.celltype_col].astype(str).map(sub_map).fillna("").astype("category")
         # 写回统一注释
         import os
         out_dir = os.environ.get("OMICAGENT_RESULTS_DIR",
                                  str(config.PROJECT_ROOT / "results"))
         os.makedirs(out_dir, exist_ok=True)
-        out_h5ad = os.path.join(out_dir, os.path.basename(path).replace(".h5ad", "_unified.h5ad"))
+        out_h5ad = os.path.join(out_dir, os.path.basename(str(path)).replace(".h5ad", "_unified.h5ad"))
         try:
             a.write_h5ad(out_h5ad)
             written = out_h5ad
@@ -293,8 +304,10 @@ class ToolRegistry:
         return {"celltype_col": ins.celltype_col, "ontology": "plant_sc",
                 "mapping": mr.mapping, "coverage": round(mr.coverage, 3),
                 "unmapped": mr.unmapped, "n_standard_types": len(set(mr.mapping.values()) - {"UNMAPPED"}),
-                "standard_col": "celltype_standard", "out_h5ad": written,
-                "note": "表优先: 同义词→mapping_table→LLM兜底. 跨物种整合前用此统一标签"}
+                "standard_col": "celltype_standard", "subtype_col": "celltype_subtype",
+                "n_subtyped": int((a.obs.get("celltype_subtype", "").astype(str) != "").sum()) if "celltype_subtype" in a.obs else 0,
+                "out_h5ad": written,
+                "note": "表优先: 同义词→mapping_table→LLM兜底. 写回 celltype_standard(SAMap用)+celltype_subtype(SATURN用/保特异群). 跨物种整合前用此统一标签"}
 
     def _build_env(self, metadata, goal=""):
         from .env_builder import EnvBuilder

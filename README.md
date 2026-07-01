@@ -440,6 +440,32 @@ agent_framework/
 
 ---
 
+## 注释统一子项目 (plant_annotation skill)
+
+> 把多物种文献/数据集的混乱细胞类型命名统一到 scPlantDB 标准体系, 保留特异群, 作为跨物种整合 (SAMap/SATURN) 前置. 详见 [skills/plant_annotation/SKILL.md](skills/plant_annotation/SKILL.md).
+
+**核心**: 表优先 (scPlantDB 同义词 → 版本化 mapping 表 → LLM 兜底回写), 覆盖率 14%→76%, LLM 0 调用. 两级映射 `standard`(粗, SAMap) + `subtype`(细, SATURN/特异群).
+
+**产物** (data/annotation/):
+- `mapping_table.v4.json` — 400 条两级映射, 13 物种 (Arabidopsis/rice/maize/soybean/tomato/cotton/cassava/tobacco/periwinkle/barrelclover/wheat/cabbage/poplar), 反向覆盖 scPlantDB 74%
+- `scplantdb_ref.json` — scPlantDB 80 标准名 ref
+- `corpus.csv` — 545 行文献注释语料 (Zotero 23篇 + PubMed 补缺)
+
+**使用**:
+```python
+from omicagent.tools import ToolRegistry
+from omicagent.llm_client import LLMClient
+reg = ToolRegistry(llm=LLMClient())
+result = reg.execute("unify_annotation", {"path": "rice_leaf.h5ad", "species": "rice", "tissue": "leaf"})
+# → 写回 {name}_unified.h5ad, 含 celltype_standard + celltype_subtype 列
+```
+
+**演示** (不依赖 scanpy): `python skills/plant_annotation/demo_unify.py`
+
+**模块**: `omicagent/annotation/` (schemas/ref_ontology/mapping_store/annotation_harvester/pdf_extractor/zotero_source)
+
+---
+
 ## 设计决策与已知限制
 
 ### 设计决策
