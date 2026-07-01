@@ -75,6 +75,7 @@ class EnvSpec:
     verify_optional: list[str] = field(default_factory=list)  # 可选依赖, 失败不阻断
     exists: bool = False
     needs_install: list[str] = field(default_factory=list)   # 缺失包
+    selection_reason: str = ""  # 环境选择原因，便于调试和报告
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -139,21 +140,31 @@ class EnvBuilder:
         # env 选择: 若含 samap -> samap; 含 r 工具 -> seurat; 否则 scagent
         if "samap" in tools:
             env_name = "samap"
+            selection_reason = "SAMap requires a dedicated environment for BLAST-based cross-species integration."
         elif "r" in languages:
             env_name = "seurat"
+            selection_reason = "R-based tools are grouped into the Seurat environment."
         else:
             env_name = "scagent"
+            selection_reason = "Python-based single-cell tools are grouped into the scagent environment."
 
         spec = EnvSpec(
             env_name=env_name,
             language="both" if len(languages) > 1 else (languages.pop() if languages else "python"),
             analysis_tools=tools,
-            conda_packages=list(dict.fromkeys(conda)),  # 去重保序
+            conda_packages=list(dict.fromkeys(conda)),
             pip_packages=list(dict.fromkeys(pip)),
             verify_cmds=verify,
+            selection_reason=selection_reason,
         )
         spec.verify_optional = verify_opt
         spec.exists = self._env_exists(env_name)
+
+        log.info(
+            "Selected environment '%s': %s",
+            spec.env_name,
+            spec.selection_reason,
+        )
         return spec
 
     def _env_exists(self, env_name: str) -> bool:
@@ -161,7 +172,7 @@ class EnvBuilder:
         # grep returns exit code 1 when the environment is not found.
         # This is an expected condition rather than an execution error.
         r = self.dispatcher.run_shell(cmd, warn_on_failure=False)
-
+        return r.success
 
     def _installed_pkgs(self, env_name: str) -> set[str]:
         r = self.dispatcher.run_shell(f"conda run -n {env_name} pip list 2>/dev/null; conda run -n {env_name} conda list 2>/dev/null")
