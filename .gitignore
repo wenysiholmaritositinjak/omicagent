@@ -31,6 +31,7 @@ data/annotation/*
 !data/annotation/mapping_table.v1.json
 !data/annotation/mapping_table.v2.json
 !data/annotation/mapping_table.v3.json
+!data/annotation/mapping_table.v4.json
 !data/annotation/p2_mapping_report.md
 *.h5ad
 *.h5

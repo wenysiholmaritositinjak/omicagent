@@ -248,14 +248,14 @@ class ToolRegistry:
                "n_cells": a.n_obs, "n_genes": a.n_vars}
         if ins.celltype_col:
             ont = load_scplantdb_ontology()  # scPlantDB ref 本体 (80 类, 跨物种多组织)
-            store_path = config.PROJECT_ROOT / "data" / "annotation" / "mapping_table.v3.json"
+            store_path = config.PROJECT_ROOT / "data" / "annotation" / "mapping_table.v4.json"
             store = MappingStore(str(store_path)) if store_path.exists() else None
             mr = mp.map_to_standard(a, ins.celltype_col, ont, mapping_store=store)
             out["mapping"] = mr.mapping
             out["coverage"] = round(mr.coverage, 3)
             out["unmapped"] = mr.unmapped
             out["ontology"] = "plant_sc (scPlantDB ref)"
-            out["mapping_store"] = "mapping_table.v3.json" if store else None
+            out["mapping_store"] = "mapping_table.v4.json" if store else None
         return out
 
     def _unify_annotation(self, path, species="", tissue=""):
@@ -274,7 +274,7 @@ class ToolRegistry:
         if not ins.celltype_col:
             return {"error": f"未识别到细胞类型列, 可用列: {list(a.obs.columns)}"}
         ont = load_scplantdb_ontology()
-        store_path = config.PROJECT_ROOT / "data" / "annotation" / "mapping_table.v3.json"
+        store_path = config.PROJECT_ROOT / "data" / "annotation" / "mapping_table.v4.json"
         store = MappingStore(str(store_path)) if store_path.exists() else None
         mr = mp.map_to_standard(a, ins.celltype_col, ont,
                                 mapping_store=store, species=species, tissue=tissue)
