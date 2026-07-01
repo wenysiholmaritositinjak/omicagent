@@ -55,7 +55,7 @@ class ToolDispatcher:
 
     # ---------- 2. Shell / 容器命令执行 ----------
     def run_shell(self, cmd: str, timeout: int = 1800, cwd: Optional[Path] = None,
-                  env: Optional[dict] = None) -> ShellResult:
+              env: Optional[dict] = None, warn_on_failure: bool = True) -> ShellResult:
         """在分析环境内执行 Shell 命令 (带超时与日志)."""
         log.info("执行命令: %s", cmd)
         run_cwd = str(cwd) if cwd else str(self.workdir)
@@ -65,7 +65,7 @@ class ToolDispatcher:
                 timeout=timeout, env=env, executable="/bin/bash",
             )
             ok = proc.returncode == 0
-            if not ok:
+            if not ok and warn_on_failure:
                 log.warning("命令失败 [%s]: %s", proc.returncode, proc.stderr[-500:])
             return ShellResult(cmd, proc.returncode, proc.stdout, proc.stderr, ok)
         except subprocess.TimeoutExpired:

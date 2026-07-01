@@ -157,8 +157,11 @@ class EnvBuilder:
         return spec
 
     def _env_exists(self, env_name: str) -> bool:
-        r = self.dispatcher.run_shell(f"conda env list 2>/dev/null | grep -q '^env' ; conda env list | awk '{{print $1}}' | grep -qx '{env_name}'")
-        return r.success
+        cmd = f"conda env list 2>/dev/null | awk '{{print $1}}' | grep -qx '{env_name}'"
+        # grep returns exit code 1 when the environment is not found.
+        # This is an expected condition rather than an execution error.
+        r = self.dispatcher.run_shell(cmd, warn_on_failure=False)
+
 
     def _installed_pkgs(self, env_name: str) -> set[str]:
         r = self.dispatcher.run_shell(f"conda run -n {env_name} pip list 2>/dev/null; conda run -n {env_name} conda list 2>/dev/null")
